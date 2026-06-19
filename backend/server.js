@@ -16,9 +16,18 @@ connectDB().then(async () => {
   const server = http.createServer(app);
 
   // ── Socket.IO setup ─────────────────────────────────────────
+  const allowedOrigins = [
+    process.env.CLIENT_URL,
+    process.env.CLIENT_URL_ALT,
+    'http://localhost:3000',
+  ].filter(Boolean).map(o => o.replace(/\/$/, ''));
+
   const io = new Server(server, {
     cors: {
-      origin:      process.env.CLIENT_URL || 'http://localhost:3000',
+      origin: (origin, callback) => {
+        if (!origin || allowedOrigins.includes(origin)) return callback(null, true);
+        callback(new Error(`Socket.IO CORS: origin ${origin} not allowed`));
+      },
       credentials: true,
     },
   });
