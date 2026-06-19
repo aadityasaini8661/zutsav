@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useRef } from 'react';
+﻿import React, { useEffect, useState, useRef } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import {
   ArrowRight, Shield, Clock, Star, Users, CheckCircle,
@@ -6,13 +6,13 @@ import {
 } from 'lucide-react';
 import API from '../api/axios';
 
-// ─── Static data ──────────────────────────────────────────────────────────────
+// â”€â”€â”€ Static data â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
 
 const stats = [
-  { value: '10,000+', label: 'Sacred Rituals', icon: '🙏' },
-  { value: '500+',    label: 'Verified Pandits', icon: '📿' },
-  { value: '50+',     label: 'Cities Covered',   icon: '🛕' },
-  { value: '4.9★',   label: 'Average Rating',   icon: '⭐' },
+  { value: '10,000+', label: 'Sacred Rituals', icon: 'ðŸ™' },
+  { value: '500+',    label: 'Verified Pandits', icon: 'ðŸ“¿' },
+  { value: '50+',     label: 'Cities Covered',   icon: 'ðŸ›•' },
+  { value: '4.9â˜…',   label: 'Average Rating',   icon: 'â­' },
 ];
 
 const CAT_GRADIENTS = [
@@ -40,9 +40,9 @@ const features = [
 ];
 
 const steps = [
-  { num: '01', title: 'Choose Your Pooja',  desc: 'Browse our curated list of poojas and havans for every occasion.', icon: '🙏' },
-  { num: '02', title: 'Select Date & Time', desc: 'Pick a slot that works for you — we work around your schedule.', icon: '📅' },
-  { num: '03', title: 'Pandit Arrives',     desc: 'A verified pandit arrives at your home with all required samagri.', icon: '🪔' },
+  { num: '01', title: 'Choose Your Pooja',  desc: 'Browse our curated list of poojas and havans for every occasion.', icon: 'ðŸ™' },
+  { num: '02', title: 'Select Date & Time', desc: 'Pick a slot that works for you â€” we work around your schedule.', icon: 'ðŸ“…' },
+  { num: '03', title: 'Pandit Arrives',     desc: 'A verified pandit arrives at your home with all required samagri.', icon: 'ðŸª”' },
 ];
 
 const testimonials = [
@@ -68,7 +68,7 @@ const faqs = [
   { q: 'How do I get pandit contact info?', a: 'Once admin assigns a pandit, you receive their name and contact via WhatsApp notification immediately.' },
 ];
 
-// ─── Scroll reveal hook ────────────────────────────────────────────────────────
+// â”€â”€â”€ Scroll reveal hook â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
 function useInView(options = {}) {
   const ref = useRef(null);
   const [inView, setInView] = useState(false);
@@ -84,7 +84,7 @@ function useInView(options = {}) {
   return [ref, inView];
 }
 
-// ─── Section tag ───────────────────────────────────────────────────────────────
+// â”€â”€â”€ Section tag â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
 function EyebrowTag({ children, light }) {
   if (light) {
     return (
@@ -126,7 +126,7 @@ function FaqItem({ faq, index, open, toggle }) {
   );
 }
 
-// ─── Main ─────────────────────────────────────────────────────────────────────
+// â”€â”€â”€ Main â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
 export default function Home() {
   const [categories,     setCategories]     = useState([]);
   const [featuredPoojas, setFeaturedPoojas] = useState([]);
@@ -161,9 +161,9 @@ export default function Home() {
   return (
     <div className="overflow-hidden">
 
-      {/* ═══════════════════════════════════════════════════════
-          HERO — V3
-      ═══════════════════════════════════════════════════════ */}
+      {/* â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+          HERO â€” V3
+      â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â• */}
       <section
         className="relative min-h-[96vh] flex flex-col items-center justify-center overflow-hidden"
         style={{ background: 'linear-gradient(160deg, #FAF6EE 0%, #FFF8F0 50%, #FAF6EE 100%)' }}
@@ -192,7 +192,7 @@ export default function Home() {
         <div className="absolute bottom-0 right-1/4 w-[500px] h-[500px] bg-temple-100 rounded-full blur-[140px] opacity-35 translate-y-1/3 pointer-events-none" />
 
         {/* Floating sacred particles */}
-        {['🪔', '🌸', '✨', '🌺', '🙏', '🌿', '⭐', '🪷'].map((e, i) => (
+        {['ðŸª”', 'ðŸŒ¸', 'âœ¨', 'ðŸŒº', 'ðŸ™', 'ðŸŒ¿', 'â­', 'ðŸª·'].map((e, i) => (
           <span
             key={i}
             className="absolute pointer-events-none select-none animate-float"
@@ -220,7 +220,7 @@ export default function Home() {
             </div>
           </div>
 
-          {/* Display headline — Cormorant Garamond */}
+          {/* Display headline â€” Cormorant Garamond */}
           <h1
             className={`font-display font-bold text-gray-900 leading-[0.92] mb-7 transition-all duration-700 delay-100 ${heroInView ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}
             style={{ fontSize: 'clamp(3.5rem, 10vw, 7rem)', letterSpacing: '-0.03em' }}
@@ -234,7 +234,7 @@ export default function Home() {
 
           {/* Subtitle */}
           <p className={`font-sans text-lg md:text-xl text-gray-500 max-w-2xl mx-auto mb-10 leading-relaxed transition-all duration-700 delay-150 ${heroInView ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-6'}`}>
-            Connect with verified pandits, celebrate every festival, and discover authentic spiritual products — all in one sacred space.
+            Connect with verified pandits, celebrate every festival, and discover authentic spiritual products â€” all in one sacred space.
           </p>
 
           {/* Search bar */}
@@ -260,10 +260,10 @@ export default function Home() {
           {/* Quick-action chips */}
           <div className={`flex flex-wrap items-center justify-center gap-2.5 mb-12 transition-all duration-700 delay-[350ms] ${heroInView ? 'opacity-100' : 'opacity-0'}`}>
             {[
-              { label: 'Book a Pooja',   to: '/poojas',      icon: '🙏' },
-              { label: 'Find a Temple',  to: '/temples',     icon: '🛕' },
-              { label: 'Shop Samagri',   to: '/marketplace', icon: '🪔' },
-              { label: 'Panchang',       to: '/panchang',    icon: '📅' },
+              { label: 'Book a Pooja',   to: '/poojas',      icon: 'ðŸ™' },
+              { label: 'Find a Temple',  to: '/temples',     icon: 'ðŸ›•' },
+              { label: 'Shop Samagri',   to: '/marketplace', icon: 'ðŸª”' },
+              { label: 'Panchang',       to: '/panchang',    icon: 'ðŸ“…' },
             ].map(({ label, to, icon }) => (
               <Link
                 key={label}
@@ -281,7 +281,7 @@ export default function Home() {
             {[
               { icon: CheckCircle, text: 'KYC Verified Pandits' },
               { icon: Shield,      text: 'Secure Payments' },
-              { icon: Star,        text: '4.9★ Rated Service' },
+              { icon: Star,        text: '4.9â˜… Rated Service' },
             ].map(({ icon: Icon, text }) => (
               <span key={text} className="flex items-center gap-1.5 bg-white/80 border border-white/90 px-3.5 py-1.5 rounded-full shadow-sm text-gray-500 font-sans text-xs">
                 <Icon size={12} className="text-saffron-500" /> {text}
@@ -297,9 +297,9 @@ export default function Home() {
         </div>
       </section>
 
-      {/* ═══════════════════════════════════════════════════════
-          STATS BAR — dark charcoal with gold accents
-      ═══════════════════════════════════════════════════════ */}
+      {/* â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+          STATS BAR â€” dark charcoal with gold accents
+      â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â• */}
       <section className="relative overflow-hidden" style={{ background: 'linear-gradient(145deg, #1C1C1E 0%, #2a1500 50%, #1C1C1E 100%)' }}>
         <div className="absolute inset-0 sacred-pattern opacity-10 pointer-events-none" />
         <div ref={statsRef} className="max-w-5xl mx-auto px-4 py-12">
@@ -321,16 +321,16 @@ export default function Home() {
         </div>
       </section>
 
-      {/* ═══════════════════════════════════════════════════════
+      {/* â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
           POOJA CATEGORIES
-      ═══════════════════════════════════════════════════════ */}
+      â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â• */}
       <section className="section-pad sacred-pattern" style={{ background: '#FAF6EE' }}>
         <div ref={catRef} className="container-pad">
           <div className="text-center mb-14">
             <EyebrowTag>Our Services</EyebrowTag>
             <h2 className="section-title">Browse by Category</h2>
             <p className="section-subtitle mx-auto text-center">
-              From Gruhapravesh to Satyanarayan — find the right pooja for every occasion
+              From Gruhapravesh to Satyanarayan â€” find the right pooja for every occasion
             </p>
           </div>
 
@@ -346,8 +346,8 @@ export default function Home() {
                   >
                     <div className={`w-14 h-14 ${CAT_ICON_BG[i % CAT_ICON_BG.length]} rounded-2xl flex items-center justify-center mb-3 overflow-hidden transition-transform duration-300 group-hover:scale-110`}>
                       {cat.image
-                        ? <img src={`http://localhost:5000/${cat.image}`} alt={cat.name} className="w-full h-full object-cover" />
-                        : <span className="text-2xl">🙏</span>
+                        ? <img src={`https://zutsav-production.up.railway.app/${cat.image}`} alt={cat.name} className="w-full h-full object-cover" />
+                        : <span className="text-2xl">ðŸ™</span>
                       }
                     </div>
                     <span className="text-xs font-semibold text-gray-700 group-hover:text-saffron-700 transition-colors leading-tight font-sans">{cat.name}</span>
@@ -364,9 +364,9 @@ export default function Home() {
         </div>
       </section>
 
-      {/* ═══════════════════════════════════════════════════════
+      {/* â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
           FEATURED POOJAS
-      ═══════════════════════════════════════════════════════ */}
+      â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â• */}
       {(poojaLoading || featuredPoojas.length > 0) && (
         <section className="section-pad bg-white">
           <div ref={poojaRef} className="container-pad">
@@ -391,8 +391,8 @@ export default function Home() {
                     >
                       <div className="relative h-52 bg-saffron-50 overflow-hidden">
                         {p.image
-                          ? <img src={`http://localhost:5000/${p.image}`} alt={p.name} className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" />
-                          : <div className="w-full h-full flex items-center justify-center text-6xl bg-gradient-to-br from-saffron-50 to-orange-50">🪔</div>
+                          ? <img src={`https://zutsav-production.up.railway.app/${p.image}`} alt={p.name} className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" />
+                          : <div className="w-full h-full flex items-center justify-center text-6xl bg-gradient-to-br from-saffron-50 to-orange-50">ðŸª”</div>
                         }
                         {p.isFeatured && (
                           <span className="absolute top-3 left-3 text-white text-[10px] font-bold px-2.5 py-1 rounded-full uppercase tracking-wide shadow-sm font-sans"
@@ -407,8 +407,8 @@ export default function Home() {
                         <p className="text-sm text-gray-400 line-clamp-2 mb-4 font-sans leading-relaxed">{p.shortDesc}</p>
                         <div className="flex items-center justify-between">
                           <div>
-                            <span className="font-display text-2xl font-bold text-saffron-600">₹{p.price.toLocaleString('en-IN')}</span>
-                            {p.duration && <span className="text-xs text-gray-400 ml-2 font-sans">· {p.duration}</span>}
+                            <span className="font-display text-2xl font-bold text-saffron-600">â‚¹{p.price.toLocaleString('en-IN')}</span>
+                            {p.duration && <span className="text-xs text-gray-400 ml-2 font-sans">Â· {p.duration}</span>}
                           </div>
                           <Link to={`/book/${p.slug}`} onClick={(e) => e.stopPropagation()} className="btn-primary text-sm px-5 py-2 rounded-xl">
                             Book Now
@@ -423,16 +423,16 @@ export default function Home() {
         </section>
       )}
 
-      {/* ═══════════════════════════════════════════════════════
+      {/* â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
           HOW IT WORKS
-      ═══════════════════════════════════════════════════════ */}
+      â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â• */}
       <section className="section-pad sacred-pattern" style={{ background: '#FAF6EE' }}>
         <div ref={stepsRef} className="container-pad">
           <div className="text-center mb-16">
             <EyebrowTag>Simple &amp; Seamless</EyebrowTag>
             <h2 className="section-title">How Zutsav Works</h2>
             <p className="section-subtitle mx-auto text-center">
-              Book a verified pandit in minutes — from anywhere in India
+              Book a verified pandit in minutes â€” from anywhere in India
             </p>
           </div>
 
@@ -469,9 +469,9 @@ export default function Home() {
         </div>
       </section>
 
-      {/* ═══════════════════════════════════════════════════════
-          UPCOMING FESTIVALS — dark sacred
-      ═══════════════════════════════════════════════════════ */}
+      {/* â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+          UPCOMING FESTIVALS â€” dark sacred
+      â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â• */}
       {festivals.length > 0 && (
         <section
           ref={festivalRef}
@@ -503,7 +503,7 @@ export default function Home() {
                     style={{ transitionDelay: `${i * 100}ms` }}
                   >
                     <div className="flex items-center justify-between mb-4">
-                      <span className="text-3xl">🎉</span>
+                      <span className="text-3xl">ðŸŽ‰</span>
                       {daysUntil >= 0 && daysUntil <= 30 && (
                         <span className="text-[10px] font-bold px-2.5 py-0.5 rounded-full font-sans"
                           style={{ background: 'rgba(255,107,0,0.2)', color: '#ffb85a' }}>
@@ -529,9 +529,9 @@ export default function Home() {
         </section>
       )}
 
-      {/* ═══════════════════════════════════════════════════════
+      {/* â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
           WHY ZUTSAV
-      ═══════════════════════════════════════════════════════ */}
+      â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â• */}
       <section className="section-pad bg-white">
         <div ref={featuresRef} className="container-pad">
           <div className="text-center mb-16">
@@ -560,9 +560,9 @@ export default function Home() {
         </div>
       </section>
 
-      {/* ═══════════════════════════════════════════════════════
+      {/* â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
           TESTIMONIALS
-      ═══════════════════════════════════════════════════════ */}
+      â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â• */}
       <section className="section-pad sacred-pattern" style={{ background: '#FAF6EE' }}>
         <div ref={testRef} className="container-pad">
           <div className="text-center mb-14">
@@ -601,9 +601,9 @@ export default function Home() {
         </div>
       </section>
 
-      {/* ═══════════════════════════════════════════════════════
+      {/* â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
           FAQ
-      ═══════════════════════════════════════════════════════ */}
+      â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â• */}
       <section className="section-pad bg-white">
         <div className="max-w-3xl mx-auto px-4">
           <div className="text-center mb-14">
@@ -618,9 +618,9 @@ export default function Home() {
         </div>
       </section>
 
-      {/* ═══════════════════════════════════════════════════════
-          CTA BANNER — deep sacred gradient
-      ═══════════════════════════════════════════════════════ */}
+      {/* â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+          CTA BANNER â€” deep sacred gradient
+      â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â• */}
       <section
         className="section-pad-sm text-white relative overflow-hidden"
         style={{ background: 'linear-gradient(135deg, #5A0000 0%, #8f3800 40%, #FF6B00 100%)' }}
@@ -630,7 +630,7 @@ export default function Home() {
         <div className="absolute bottom-0 right-1/4 w-64 h-64 bg-gold-400 rounded-full blur-[80px] opacity-15 pointer-events-none" />
 
         <div className="container-pad relative text-center">
-          <div className="text-5xl mb-5">🙏</div>
+          <div className="text-5xl mb-5">ðŸ™</div>
           <h2 className="font-display font-bold mb-4 leading-tight" style={{ fontSize: 'clamp(2rem, 5vw, 3.5rem)', letterSpacing: '-0.03em' }}>
             Connect with<br />the Divine Today
           </h2>
@@ -657,3 +657,4 @@ export default function Home() {
     </div>
   );
 }
+

@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+﻿import React, { useEffect, useState } from 'react';
 import { Calendar, Clock, Hash, User, BookOpen, CheckCircle, Sparkles, Star } from 'lucide-react';
 import API from '../api/axios';
 import toast from 'react-hot-toast';
@@ -44,7 +44,7 @@ function JourneyTracker({ status }) {
     return (
       <div className="flex items-center gap-2 text-xs text-orange-600 font-semibold">
         <div className="w-2 h-2 rounded-full bg-orange-400 animate-pulse" />
-        Finding the right pandit for you…
+        Finding the right pandit for youâ€¦
       </div>
     );
   }
@@ -120,7 +120,7 @@ function StarRating({ bookingId, onRated }) {
       <textarea
         className="w-full text-sm border border-amber-200 rounded-lg p-2.5 resize-none bg-white focus:outline-none focus:ring-2 focus:ring-amber-300"
         rows={2}
-        placeholder="Share your experience (optional)…"
+        placeholder="Share your experience (optional)â€¦"
         value={review}
         onChange={(e) => setReview(e.target.value)}
       />
@@ -130,7 +130,7 @@ function StarRating({ bookingId, onRated }) {
         className="w-full py-2 rounded-lg text-sm font-semibold text-white disabled:opacity-50 transition-colors"
         style={{ background: '#1B1F3B' }}
       >
-        {submitting ? 'Submitting…' : 'Submit Rating'}
+        {submitting ? 'Submittingâ€¦' : 'Submit Rating'}
       </button>
     </div>
   );
@@ -168,7 +168,7 @@ function BookingCard({ b, onReload }) {
 
           <div className="flex flex-col items-end gap-2 shrink-0">
             <span style={{ fontFamily: '"Cormorant Garamond"' }} className="text-2xl font-bold text-gray-900">
-              ₹{b.amount?.toLocaleString('en-IN')}
+              â‚¹{b.amount?.toLocaleString('en-IN')}
             </span>
             <span className={`text-xs font-semibold px-3 py-1 rounded-full border ${meta.bg} ${meta.color} ${meta.border}`}>
               {meta.label}
@@ -198,7 +198,7 @@ function BookingCard({ b, onReload }) {
             <div className="flex items-center gap-2.5">
               <div className="w-8 h-8 rounded-full overflow-hidden bg-indigo-50 flex items-center justify-center border border-indigo-100 shrink-0">
                 {b.panditId.profilePhoto
-                  ? <img src={`http://localhost:5000/${b.panditId.profilePhoto}`} className="w-full h-full object-cover" alt="" />
+                  ? <img src={`https://zutsav-production.up.railway.app/${b.panditId.profilePhoto}`} className="w-full h-full object-cover" alt="" />
                   : <User size={13} className="text-indigo-400" />}
               </div>
               <div>
@@ -330,3 +330,4 @@ export default function MyBookings() {
     </div>
   );
 }
+

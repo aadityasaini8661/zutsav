@@ -1,4 +1,4 @@
-import React, { useState, useRef, useEffect } from 'react';
+﻿import React, { useState, useRef, useEffect } from 'react';
 import { Link, useNavigate, useLocation } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
 import {
@@ -109,7 +109,7 @@ export default function Navbar() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className={`flex items-center justify-between gap-4 transition-all duration-300 ${scrolled ? 'h-14' : 'h-16'}`}>
 
-            {/* ── Logo ─────────────────────────────────────────── */}
+            {/* â”€â”€ Logo â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */}
             <Link to="/" className="flex items-center shrink-0 group">
               <img
                 src="https://zutsav.com/storage/settings/admin_logo_1778665731.png"
@@ -118,7 +118,7 @@ export default function Navbar() {
               />
             </Link>
 
-            {/* ── Desktop navigation ───────────────────────────── */}
+            {/* â”€â”€ Desktop navigation â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */}
             <div className="hidden lg:flex items-center gap-0.5 flex-1 justify-center">
               {isAuthenticated ? (
                 <>
@@ -198,7 +198,7 @@ export default function Navbar() {
               )}
             </div>
 
-            {/* ── Desktop right area ───────────────────────────── */}
+            {/* â”€â”€ Desktop right area â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */}
             <div className="hidden lg:flex items-center gap-2 shrink-0">
               {/* Theme toggle */}
               <ThemeToggle />
@@ -239,7 +239,7 @@ export default function Navbar() {
                     >
                       {user?.profilePhoto ? (
                         <img
-                          src={`http://localhost:5000/${user.profilePhoto}`}
+                          src={`https://zutsav-production.up.railway.app/${user.profilePhoto}`}
                           alt="avatar"
                           className="w-7 h-7 rounded-lg object-cover shrink-0"
                         />
@@ -280,7 +280,7 @@ export default function Navbar() {
                             <div className="flex items-center gap-3">
                               {user?.profilePhoto ? (
                                 <img
-                                  src={`http://localhost:5000/${user.profilePhoto}`}
+                                  src={`https://zutsav-production.up.railway.app/${user.profilePhoto}`}
                                   alt="avatar"
                                   className="w-10 h-10 rounded-xl object-cover shrink-0"
                                 />
@@ -371,7 +371,7 @@ export default function Navbar() {
               )}
             </div>
 
-            {/* ── Mobile hamburger ─────────────────────────────── */}
+            {/* â”€â”€ Mobile hamburger â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */}
             <button
               className="lg:hidden p-2 rounded-xl transition-colors duration-200 shrink-0"
               style={{ color: 'var(--t-muted)' }}
@@ -383,7 +383,7 @@ export default function Navbar() {
         </div>
       </nav>
 
-      {/* ── Mobile drawer ───────────────────────────────────── */}
+      {/* â”€â”€ Mobile drawer â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */}
       <AnimatePresence>
         {mobileOpen && (
           <>
@@ -434,7 +434,7 @@ export default function Navbar() {
                       style={{ background: 'var(--t-nav-active-bg)' }}
                     >
                       {user?.profilePhoto ? (
-                        <img src={`http://localhost:5000/${user.profilePhoto}`} alt="avatar"
+                        <img src={`https://zutsav-production.up.railway.app/${user.profilePhoto}`} alt="avatar"
                           className="w-10 h-10 rounded-xl object-cover shrink-0" />
                       ) : (
                         <div
@@ -554,3 +554,4 @@ export default function Navbar() {
     </>
   );
 }
+

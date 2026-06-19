@@ -1,18 +1,18 @@
-import React, { useRef, useState } from 'react';
+﻿import React, { useRef, useState } from 'react';
 import { Camera, Trash2, User } from 'lucide-react';
 import toast from 'react-hot-toast';
 import API from '../../api/axios';
 
-const API_BASE = 'http://localhost:5000';
+const API_BASE = 'https://zutsav-production.up.railway.app';
 
 /**
  * Reusable profile photo component for all roles.
  * Props:
- *   currentPhoto  – path string or null
- *   onUpdate      – (newPhotoPath | null) => void
- *   endpoint      – API endpoint for upload (default /users/profile/photo)
- *   deleteEndpoint– API endpoint for delete (default /users/profile/photo)
- *   size          – 'sm' | 'md' | 'lg'
+ *   currentPhoto  â€“ path string or null
+ *   onUpdate      â€“ (newPhotoPath | null) => void
+ *   endpoint      â€“ API endpoint for upload (default /users/profile/photo)
+ *   deleteEndpointâ€“ API endpoint for delete (default /users/profile/photo)
+ *   size          â€“ 'sm' | 'md' | 'lg'
  */
 export default function ProfilePhoto({
   currentPhoto,
@@ -133,3 +133,4 @@ export default function ProfilePhoto({
     </div>
   );
 }
+

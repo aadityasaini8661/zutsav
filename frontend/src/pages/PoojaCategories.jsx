@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+﻿import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { ArrowRight } from 'lucide-react';
 import API from '../api/axios';
@@ -27,7 +27,7 @@ export default function PoojaCategories() {
           </div>
         ) : categories.length === 0 ? (
           <div className="text-center py-20 text-gray-500">
-            <div className="text-5xl mb-4">🙏</div>
+            <div className="text-5xl mb-4">ðŸ™</div>
             <p>No categories available yet.</p>
           </div>
         ) : (
@@ -37,8 +37,8 @@ export default function PoojaCategories() {
                 className="card group p-6 flex flex-col items-center text-center hover:border-saffron-300 border-2 border-transparent">
                 <div className="w-20 h-20 bg-saffron-100 rounded-full flex items-center justify-center mb-4 group-hover:bg-saffron-200 transition-colors overflow-hidden">
                   {cat.image
-                    ? <img src={`http://localhost:5000/${cat.image}`} alt={cat.name} className="w-full h-full object-cover rounded-full" />
-                    : <span className="text-3xl">🙏</span>
+                    ? <img src={`https://zutsav-production.up.railway.app/${cat.image}`} alt={cat.name} className="w-full h-full object-cover rounded-full" />
+                    : <span className="text-3xl">ðŸ™</span>
                   }
                 </div>
                 <h3 className="font-bold text-gray-800 group-hover:text-saffron-700 mb-1">{cat.name}</h3>
@@ -54,3 +54,4 @@ export default function PoojaCategories() {
     </div>
   );
 }
+

@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+﻿import React, { useEffect, useState } from 'react';
 import { useParams, Link } from 'react-router-dom';
 import { Search, Clock, Star } from 'lucide-react';
 import API from '../api/axios';
@@ -58,7 +58,7 @@ export default function PoojaList() {
           </div>
         ) : poojas.length === 0 ? (
           <div className="text-center py-20 text-gray-500">
-            <div className="text-5xl mb-4">🙏</div>
+            <div className="text-5xl mb-4">ðŸ™</div>
             <p>No poojas found.</p>
           </div>
         ) : (
@@ -67,8 +67,8 @@ export default function PoojaList() {
               <div key={p._id} className="card group">
                 <div className="h-48 bg-saffron-100 overflow-hidden relative">
                   {p.image
-                    ? <img src={`http://localhost:5000/${p.image}`} alt={p.name} className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300" />
-                    : <div className="w-full h-full flex items-center justify-center text-5xl">🪔</div>
+                    ? <img src={`https://zutsav-production.up.railway.app/${p.image}`} alt={p.name} className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300" />
+                    : <div className="w-full h-full flex items-center justify-center text-5xl">ðŸª”</div>
                   }
                   {p.isFeatured && (
                     <span className="absolute top-3 left-3 bg-gold-500 text-white text-xs font-bold px-2 py-1 rounded-full">Featured</span>
@@ -89,7 +89,7 @@ export default function PoojaList() {
                     <span>{p.totalBookings} bookings</span>
                   </div>
                   <div className="flex items-center justify-between">
-                    <span className="text-xl font-bold text-saffron-600">₹{p.price.toLocaleString('en-IN')}</span>
+                    <span className="text-xl font-bold text-saffron-600">â‚¹{p.price.toLocaleString('en-IN')}</span>
                     <Link to={`/book/${p.slug}`} className="btn-primary text-sm px-4 py-2">Book Now</Link>
                   </div>
                 </div>
@@ -101,3 +101,4 @@ export default function PoojaList() {
     </div>
   );
 }
+

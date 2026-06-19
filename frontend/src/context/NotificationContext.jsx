@@ -1,4 +1,4 @@
-import React, { createContext, useContext, useEffect, useState, useRef, useCallback } from 'react';
+﻿import React, { createContext, useContext, useEffect, useState, useRef, useCallback } from 'react';
 import { io } from 'socket.io-client';
 import toast from 'react-hot-toast';
 import API from '../api/axios';
@@ -82,7 +82,7 @@ export function NotificationProvider({ children, user }) {
     const token = localStorage.getItem('zutsav_token');
     if (!token) return;
 
-    const apiBase = process.env.REACT_APP_API_URL || 'http://localhost:5000/api';
+    const apiBase = process.env.REACT_APP_API_URL || 'https://zutsav-production.up.railway.app/api';
     const serverUrl = apiBase.replace('/api', '');
 
     const socket = io(serverUrl, {
@@ -101,7 +101,7 @@ export function NotificationProvider({ children, user }) {
       setNotifications((prev) => [notification, ...prev]);
       setUnreadCount((c) => c + 1);
       toast(notification.title, {
-        icon: '🔔',
+        icon: 'ðŸ””',
         duration: 4000,
         style: { fontFamily: 'sans-serif', fontSize: '14px' },
       });
@@ -138,3 +138,4 @@ export const useNotifications = () => {
   if (!ctx) throw new Error('useNotifications must be used within NotificationProvider');
   return ctx;
 };
+
