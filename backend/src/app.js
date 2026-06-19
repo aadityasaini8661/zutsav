@@ -9,7 +9,20 @@ const app = express();
 
 // Security
 app.use(helmet({ crossOriginResourcePolicy: { policy: 'cross-origin' } }));
-app.use(cors({ origin: process.env.CLIENT_URL || 'http://localhost:3000', credentials: true }));
+const allowedOrigins = [
+  process.env.CLIENT_URL,
+  process.env.CLIENT_URL_ALT,
+  'http://localhost:3000',
+].filter(Boolean).map(o => o.replace(/\/$/, '')); // strip trailing slashes
+
+app.use(cors({
+  origin: (origin, callback) => {
+    // allow non-browser requests (Postman, server-to-server) and listed origins
+    if (!origin || allowedOrigins.includes(origin)) return callback(null, true);
+    callback(new Error(`CORS: origin ${origin} not allowed`));
+  },
+  credentials: true,
+}));
 
 // Auth routes get a tighter limit to prevent brute-force
 const authLimiter = rateLimit({
