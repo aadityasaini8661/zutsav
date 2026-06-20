@@ -1,4 +1,4 @@
-﻿import React, { createContext, useContext, useEffect, useState, useRef, useCallback } from 'react';
+import React, { createContext, useContext, useEffect, useState, useRef, useCallback } from 'react';
 import { io } from 'socket.io-client';
 import toast from 'react-hot-toast';
 import API from '../api/axios';
@@ -101,7 +101,7 @@ export function NotificationProvider({ children, user }) {
       setNotifications((prev) => [notification, ...prev]);
       setUnreadCount((c) => c + 1);
       toast(notification.title, {
-        icon: 'ðŸ””',
+        icon: '🔔',
         duration: 4000,
         style: { fontFamily: 'sans-serif', fontSize: '14px' },
       });

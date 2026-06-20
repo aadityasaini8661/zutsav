@@ -1,4 +1,4 @@
-﻿import React, { useEffect, useState, useCallback, useRef } from 'react';
+import React, { useEffect, useState, useCallback, useRef } from 'react';
 import {
   LayoutDashboard, BookOpen, Calendar, CalendarDays,
   IndianRupee, Ban,
@@ -15,7 +15,7 @@ import AvailabilityManager from '../components/availability/AvailabilityManager'
 import PincodeInput from '../components/shared/PincodeInput';
 import MapPicker from '../components/shared/MapPicker';
 
-// QUALIFICATION_CATEGORIES removed â€” now loaded from admin Education Masters API
+// QUALIFICATION_CATEGORIES removed — now loaded from admin Education Masters API
 
 const LANGUAGE_OPTIONS = [
   'Hindi','English','Sanskrit','Marathi','Punjabi','Gujarati',
@@ -34,7 +34,7 @@ const PROFILE_TABS = [
   { id: 'kyc',         label: 'KYC Verification',             icon: ShieldCheck },
 ];
 
-// â”€â”€â”€ Profile completion â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+// ─── Profile completion ─────────────────────────────────────────
 function calcCompletion(pandit) {
   const checks = [
     !!pandit.profilePhoto,
@@ -62,7 +62,7 @@ const KYC_STATUS_CONFIG = {
   reupload_required:{ label: 'Re-upload Required',color: 'bg-purple-100 text-purple-700',dot:'bg-purple-500' },
 };
 
-// â”€â”€â”€ Application Gate (only for blocked accounts) â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+// ─── Application Gate (only for blocked accounts) ──────────────
 function ApplicationGate({ pandit }) {
   const STATUS_CONFIG = {
     rejected: {
@@ -86,7 +86,7 @@ function ApplicationGate({ pandit }) {
       <div className="w-full max-w-lg space-y-5">
         <div className="text-center">
           <Link to="/" className="inline-flex items-center gap-2">
-            <span className="text-3xl">ðŸª”</span>
+            <span className="text-3xl">🪔</span>
             <span className="font-serif text-3xl font-bold text-maroon-600">Zutsav</span>
           </Link>
         </div>
@@ -116,7 +116,7 @@ function ApplicationGate({ pandit }) {
             <button onClick={() => window.location.reload()} className="btn-primary w-full py-2.5 flex items-center justify-center gap-2 text-sm">
               <RefreshCw size={15} /> Refresh Status
             </button>
-            <Link to="/" className="text-center text-sm text-saffron-600 hover:underline">â† Back to Home</Link>
+            <Link to="/" className="text-center text-sm text-saffron-600 hover:underline">← Back to Home</Link>
           </div>
         </div>
       </div>
@@ -124,7 +124,7 @@ function ApplicationGate({ pandit }) {
   );
 }
 
-// â”€â”€â”€ Incomplete / KYC Banner â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+// ─── Incomplete / KYC Banner ────────────────────────────────────
 function IncompleteBanner({ pandit, onGoToKYC }) {
   const completion      = calcCompletion(pandit);
   const kycStatus       = pandit.kycStatus || 'not_submitted';
@@ -148,7 +148,7 @@ function IncompleteBanner({ pandit, onGoToKYC }) {
             </p>
             <p className="text-xs text-amber-700 mt-0.5">
               Profile: {completion}% complete
-              {' Â· '}
+              {' · '}
               KYC: {KYC_STATUS_CONFIG[kycStatus]?.label}
             </p>
           </div>
@@ -167,7 +167,7 @@ function IncompleteBanner({ pandit, onGoToKYC }) {
         <div className="rounded-2xl border border-blue-200 bg-blue-50 px-5 py-3 flex items-center gap-3">
           <Clock size={16} className="text-blue-600 shrink-0" />
           <p className="text-sm text-blue-800">
-            <span className="font-semibold">KYC Under Review â€” </span>
+            <span className="font-semibold">KYC Under Review — </span>
             Your documents have been submitted. We'll notify you once verified.
           </p>
         </div>
@@ -206,7 +206,7 @@ function IncompleteBanner({ pandit, onGoToKYC }) {
   );
 }
 
-// â”€â”€â”€ Overview Tab â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+// ─── Overview Tab ───────────────────────────────────────────────
 function OverviewTab({ pandit, reload }) {
   const completion = calcCompletion(pandit);
 
@@ -225,7 +225,7 @@ function OverviewTab({ pandit, reload }) {
           endpoint="/pandits/me/photo" deleteEndpoint="/pandits/me/photo" size="md" />
         <div className="flex-1 text-center sm:text-left">
           <h2 className="text-xl font-bold text-gray-800">{pandit.name}</h2>
-          <p className="text-gray-500 text-sm">{pandit.email} Â· {pandit.phone}</p>
+          <p className="text-gray-500 text-sm">{pandit.email} · {pandit.phone}</p>
           <div className="flex flex-wrap items-center gap-2 mt-2 justify-center sm:justify-start">
             <span className="px-3 py-0.5 rounded-full text-xs font-bold bg-green-100 text-green-700">Approved</span>
             <button onClick={toggleOnline}
@@ -247,7 +247,7 @@ function OverviewTab({ pandit, reload }) {
         </div>
         <div className="flex gap-6 text-center">
           <div><p className="text-2xl font-bold" style={{ color: '#1B1F3B', fontFamily: '"Cormorant Garamond"' }}>{pandit.totalBookings}</p><p className="text-xs text-gray-400">Bookings</p></div>
-          <div><p className="text-2xl font-bold" style={{ color: '#D4AF37', fontFamily: '"Cormorant Garamond"' }}>{pandit.rating || 'â€”'}</p><p className="text-xs text-gray-400">Rating</p></div>
+          <div><p className="text-2xl font-bold" style={{ color: '#D4AF37', fontFamily: '"Cormorant Garamond"' }}>{pandit.rating || '—'}</p><p className="text-xs text-gray-400">Rating</p></div>
           <div><p className="text-2xl font-bold" style={{ color: '#1B1F3B', fontFamily: '"Cormorant Garamond"' }}>{pandit.totalReviews}</p><p className="text-xs text-gray-400">Reviews</p></div>
         </div>
       </div>
@@ -289,10 +289,10 @@ function OverviewTab({ pandit, reload }) {
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
           {[
             ['Experience', `${pandit.experience || 0} years`],
-            ['Languages', pandit.languages?.join(', ') || 'â€”'],
+            ['Languages', pandit.languages?.join(', ') || '—'],
             ['Govt ID', pandit.govtIdType?.toUpperCase()],
             ['Member Since', new Date(pandit.createdAt).toLocaleDateString('en-IN')],
-            ['Location', pandit.city ? `${pandit.city}, ${pandit.state}` : 'â€”'],
+            ['Location', pandit.city ? `${pandit.city}, ${pandit.state}` : '—'],
           ].map(([label, value]) => (
             <div key={label} className="bg-saffron-50 rounded-xl p-3">
               <p className="text-xs text-gray-400">{label}</p>
@@ -306,7 +306,7 @@ function OverviewTab({ pandit, reload }) {
             <div className="flex flex-wrap gap-2">
               {pandit.specializations.map((s, i) => (
                 <span key={i} className="bg-saffron-100 text-saffron-700 text-xs px-3 py-1 rounded-full">
-                  {s.name}{s.yearsOfExperience > 0 ? ` Â· ${s.yearsOfExperience}y` : ''}
+                  {s.name}{s.yearsOfExperience > 0 ? ` · ${s.yearsOfExperience}y` : ''}
                 </span>
               ))}
             </div>
@@ -317,7 +317,7 @@ function OverviewTab({ pandit, reload }) {
   );
 }
 
-// â”€â”€â”€ Bookings Tab â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+// ─── Bookings Tab ───────────────────────────────────────────────
 const BOOKING_STATUS_META = {
   pending_payment:       { label: 'Awaiting Payment',      color: 'bg-yellow-100 text-yellow-700'  },
   paid:                  { label: 'Paid',                  color: 'bg-blue-100 text-blue-700'      },
@@ -466,7 +466,7 @@ function BookingsTab() {
                       {needsAction && <span className="text-[10px] font-bold text-purple-700 bg-purple-50 px-2 py-0.5 rounded-full animate-pulse">Action needed</span>}
                     </div>
                     <p className="text-xs text-gray-500 mt-0.5">
-                      {addr?.name || customer.name || 'â€”'} Â· {new Date(b.scheduledDate).toLocaleDateString('en-IN', { weekday:'short', day:'numeric', month:'short', year:'numeric' })} at {b.scheduledTime}
+                      {addr?.name || customer.name || '—'} · {new Date(b.scheduledDate).toLocaleDateString('en-IN', { weekday:'short', day:'numeric', month:'short', year:'numeric' })} at {b.scheduledTime}
                     </p>
                     <p className="text-[10px] text-gray-400 mt-0.5 font-mono">#{b.bookingNumber}</p>
                   </div>
@@ -479,8 +479,8 @@ function BookingsTab() {
                     {/* Customer info */}
                     <div className="space-y-1">
                       <p className="font-bold text-gray-500 uppercase tracking-wide mb-1.5">Customer</p>
-                      <p className="font-semibold text-gray-800">{addr?.name || customer.name || 'â€”'}</p>
-                      <p className="text-gray-500">{addr?.phone || customer.phone || 'â€”'}</p>
+                      <p className="font-semibold text-gray-800">{addr?.name || customer.name || '—'}</p>
+                      <p className="text-gray-500">{addr?.phone || customer.phone || '—'}</p>
                       {(addr?.email || customer.email) && <p className="text-gray-400">{addr?.email || customer.email}</p>}
                     </div>
 
@@ -514,7 +514,7 @@ function BookingsTab() {
                     {/* Pooja */}
                     <div className="space-y-1">
                       <p className="font-bold text-gray-500 uppercase tracking-wide mb-1.5">Pooja</p>
-                      <p className="font-semibold text-gray-800">{b.poojaId?.name || 'â€”'}</p>
+                      <p className="font-semibold text-gray-800">{b.poojaId?.name || '—'}</p>
                       {b.poojaId?.duration && <p className="text-gray-400">Duration: {b.poojaId.duration}</p>}
                     </div>
 
@@ -526,7 +526,7 @@ function BookingsTab() {
                       </div>
                     )}
 
-                    {/* â”€â”€ ACCEPT / REJECT (only when status is pandit_assigned) â”€â”€ */}
+                    {/* ── ACCEPT / REJECT (only when status is pandit_assigned) ── */}
                     {b.status === 'pandit_assigned' && (
                       <div className="sm:col-span-2 pt-3 border-t border-gray-100 space-y-3">
                         <div className="bg-purple-50 border border-purple-100 rounded-xl p-3">
@@ -539,13 +539,13 @@ function BookingsTab() {
                             disabled={accepting === b._id}
                             className="flex-1 py-2.5 rounded-xl text-sm font-semibold bg-green-600 hover:bg-green-700 text-white disabled:opacity-50 transition-colors"
                           >
-                            {accepting === b._id ? 'Acceptingâ€¦' : 'âœ“ Accept Booking'}
+                            {accepting === b._id ? 'Accepting…' : '✓ Accept Booking'}
                           </button>
                           <button
                             onClick={() => { setRejectModal({ bookingId: b._id, bookingNumber: b.bookingNumber }); setRejectReason(''); }}
                             className="flex-1 py-2.5 rounded-xl text-sm font-semibold bg-red-100 hover:bg-red-200 text-red-700 transition-colors"
                           >
-                            âœ— Reject Booking
+                            ✗ Reject Booking
                           </button>
                         </div>
                       </div>
@@ -555,7 +555,7 @@ function BookingsTab() {
                     {b.status === 'pandit_accepted' && (
                       <div className="sm:col-span-2 pt-2 border-t border-gray-100">
                         <div className="bg-teal-50 border border-teal-200 rounded-xl p-3">
-                          <p className="text-teal-700 font-semibold text-sm">âœ“ You have accepted this booking</p>
+                          <p className="text-teal-700 font-semibold text-sm">✓ You have accepted this booking</p>
                           <p className="text-teal-600 text-[11px] mt-0.5">Perform the pooja on {new Date(b.scheduledDate).toLocaleDateString('en-IN', { weekday:'long', day:'numeric', month:'long' })} and then mark it as completed below.</p>
                         </div>
                         <button
@@ -564,7 +564,7 @@ function BookingsTab() {
                           className="w-full mt-3 py-2.5 rounded-xl text-sm font-semibold transition-all disabled:opacity-50"
                           style={{ background: '#1B1F3B', color: 'white' }}
                         >
-                          {completing === b._id ? 'Submittingâ€¦' : 'Mark Pooja as Completed'}
+                          {completing === b._id ? 'Submitting…' : 'Mark Pooja as Completed'}
                         </button>
                         <p className="text-[10px] text-gray-400 text-center mt-1.5">Admin will verify and approve the completion</p>
                       </div>
@@ -576,7 +576,7 @@ function BookingsTab() {
                         <button onClick={() => handleRequestCompletion(b._id)} disabled={completing === b._id}
                           className="w-full py-2.5 rounded-xl text-sm font-semibold transition-all disabled:opacity-50"
                           style={{ background: '#1B1F3B', color: 'white' }}>
-                          {completing === b._id ? 'Submittingâ€¦' : 'Mark Pooja as Completed'}
+                          {completing === b._id ? 'Submitting…' : 'Mark Pooja as Completed'}
                         </button>
                       </div>
                     )}
@@ -593,7 +593,7 @@ function BookingsTab() {
                     {b.status === 'completed' && (
                       <div className="sm:col-span-2 pt-2 border-t border-gray-100">
                         <div className="bg-green-50 border border-green-200 rounded-xl p-3 text-center">
-                          <p className="text-green-700 font-semibold text-sm">âœ“ Booking Completed</p>
+                          <p className="text-green-700 font-semibold text-sm">✓ Booking Completed</p>
                           {b.completedAt && <p className="text-green-500 text-[10px] mt-0.5">Verified on {new Date(b.completedAt).toLocaleDateString('en-IN')}{b.verifiedByName ? ` by ${b.verifiedByName}` : ''}</p>}
                         </div>
                       </div>
@@ -627,7 +627,7 @@ function BookingsTab() {
             <label className="label">Reason <span className="text-gray-400 font-normal">(min 10 characters)</span></label>
             <textarea
               className="input min-h-[80px] resize-none text-sm mb-4"
-              placeholder="Describe why you cannot accept this bookingâ€¦"
+              placeholder="Describe why you cannot accept this booking…"
               value={rejectReason}
               onChange={(e) => setRejectReason(e.target.value)}
             />
@@ -644,7 +644,7 @@ function BookingsTab() {
                 disabled={submittingReject || rejectReason.trim().length < 10}
                 className="flex-1 py-2.5 rounded-xl text-sm font-semibold bg-red-600 hover:bg-red-700 text-white disabled:opacity-50 transition-colors"
               >
-                {submittingReject ? 'Submittingâ€¦' : 'Confirm Rejection'}
+                {submittingReject ? 'Submitting…' : 'Confirm Rejection'}
               </button>
             </div>
           </div>
@@ -654,7 +654,7 @@ function BookingsTab() {
   );
 }
 
-// â”€â”€â”€ Festival Calendar Tab â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+// ─── Festival Calendar Tab ──────────────────────────────────────
 const MONTHS = ['January','February','March','April','May','June','July','August','September','October','November','December'];
 function FestivalsTab() {
   const [festivals, setFestivals] = useState([]);
@@ -703,7 +703,7 @@ function FestivalsTab() {
   );
 }
 
-// â”€â”€â”€ Earnings Tab â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+// ─── Earnings Tab ───────────────────────────────────────────────
 function EarningsTab({ pandit }) {
   const [ratings,      setRatings]      = useState([]);
   const [ratingsLoad,  setRatingsLoad]  = useState(true);
@@ -731,7 +731,7 @@ function EarningsTab({ pandit }) {
       <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
         {[
           { label: 'Total Bookings', value: pandit.totalBookings || 0, icon: BookOpen, color: 'text-blue-600 bg-blue-50' },
-          { label: 'Avg Rating',     value: pandit.rating ? pandit.rating.toFixed(1) : 'â€”', icon: Star, color: 'text-amber-600 bg-amber-50' },
+          { label: 'Avg Rating',     value: pandit.rating ? pandit.rating.toFixed(1) : '—', icon: Star, color: 'text-amber-600 bg-amber-50' },
           { label: 'Reviews',        value: pandit.totalReviews || 0,  icon: User,     color: 'text-green-600 bg-green-50' },
         ].map(({ label, value, icon: Icon, color }) => (
           <div key={label} className="bg-white rounded-2xl border border-gray-100 p-5 flex items-center gap-4">
@@ -773,7 +773,7 @@ function EarningsTab({ pandit }) {
                   </div>
                   <div className="text-right shrink-0">
                     <p className="text-[10px] text-gray-400">
-                      {b.ratingDate ? new Date(b.ratingDate).toLocaleDateString('en-IN', { day:'numeric', month:'short', year:'numeric' }) : 'â€”'}
+                      {b.ratingDate ? new Date(b.ratingDate).toLocaleDateString('en-IN', { day:'numeric', month:'short', year:'numeric' }) : '—'}
                     </p>
                     <p className="text-[10px] text-gray-400 mt-0.5">
                       {new Date(b.scheduledDate).toLocaleDateString('en-IN', { day:'numeric', month:'short', year:'numeric' })}
@@ -789,11 +789,11 @@ function EarningsTab({ pandit }) {
   );
 }
 
-// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
-// PROFILE EDITOR â€” 7-tab system
-// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+// ═══════════════════════════════════════════════════════════════
+// PROFILE EDITOR — 7-tab system
+// ═══════════════════════════════════════════════════════════════
 
-// â”€â”€ Tab 1: Personal Details â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+// ── Tab 1: Personal Details ─────────────────────────────────────
 function PersonalDetailsTab({ pandit, reload }) {
   const [form, setForm] = useState({
     name:       pandit.name       || '',
@@ -839,7 +839,7 @@ function PersonalDetailsTab({ pandit, reload }) {
               KYC: {pandit.govtIdType?.toUpperCase() || 'Pending'}
             </span>
             <span className={`text-xs px-2.5 py-1 rounded-full font-medium ${pandit.status === 'approved' ? 'bg-green-100 text-green-700' : 'bg-gray-100 text-gray-600'}`}>
-              {pandit.status === 'approved' ? 'âœ“ Verified' : pandit.status?.replace(/_/g, ' ')}
+              {pandit.status === 'approved' ? '✓ Verified' : pandit.status?.replace(/_/g, ' ')}
             </span>
           </div>
         </div>
@@ -903,7 +903,7 @@ function PersonalDetailsTab({ pandit, reload }) {
   );
 }
 
-// â”€â”€ Tab 2: Languages & Address â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+// ── Tab 2: Languages & Address ──────────────────────────────────
 const COVERAGE_OPTIONS = [
   { value: 'radius',   label: 'Custom Radius' },
   { value: 'city',     label: 'Entire City' },
@@ -978,7 +978,7 @@ function LanguagesAddressTab({ pandit, reload }) {
             return (
               <button key={lang} type="button" onClick={() => toggleLang(lang)}
                 className={`px-3 py-1.5 rounded-full text-sm font-medium border transition-all ${active ? 'bg-saffron-500 text-white border-saffron-500' : 'bg-white text-gray-600 border-gray-200 hover:border-saffron-300'}`}>
-                {active && <span className="mr-1">âœ“</span>}{lang}
+                {active && <span className="mr-1">✓</span>}{lang}
               </button>
             );
           })}
@@ -995,7 +995,7 @@ function LanguagesAddressTab({ pandit, reload }) {
             {selectedLangs.filter((l) => !LANGUAGE_OPTIONS.includes(l)).map((lang) => (
               <span key={lang} className="bg-saffron-100 text-saffron-700 text-sm px-3 py-1 rounded-full flex items-center gap-1">
                 {lang}
-                <button onClick={() => setSelectedLangs((p) => p.filter((l) => l !== lang))} className="hover:text-red-500 ml-1">Ã—</button>
+                <button onClick={() => setSelectedLangs((p) => p.filter((l) => l !== lang))} className="hover:text-red-500 ml-1">×</button>
               </span>
             ))}
           </div>
@@ -1112,7 +1112,7 @@ function LanguagesAddressTab({ pandit, reload }) {
   );
 }
 
-// â”€â”€ Tab 3: Education â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+// ── Tab 3: Education ────────────────────────────────────────────
 function EducationTab({ pandit, reload }) {
   const [quals, setQuals] = useState(
     pandit.qualifications?.length > 0
@@ -1234,7 +1234,7 @@ function EducationTab({ pandit, reload }) {
   );
 }
 
-// â”€â”€ Tab 4: Experience & Specializations â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+// ── Tab 4: Experience & Specializations ────────────────────────
 function ExperienceTab({ pandit, reload }) {
   const [overall,       setOverall]       = useState(pandit.experience || '');
   const [specs,         setSpecs]         = useState(
@@ -1376,7 +1376,7 @@ function ExperienceTab({ pandit, reload }) {
   );
 }
 
-// â”€â”€ Tab 5: Pooja Services â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+// ── Tab 5: Pooja Services ───────────────────────────────────────
 function PoojasTab({ pandit, reload }) {
   const [catalog, setCatalog] = useState([]);
   const [search, setSearch] = useState('');
@@ -1506,7 +1506,7 @@ function PoojasTab({ pandit, reload }) {
                     {p.categoryId?.name && <p className="text-xs text-gray-400">{p.categoryId.name}</p>}
                   </div>
                   <div className="text-right shrink-0">
-                    {p.price > 0 && <p className="text-xs font-semibold text-saffron-600">â‚¹{p.price}</p>}
+                    {p.price > 0 && <p className="text-xs font-semibold text-saffron-600">₹{p.price}</p>}
                     {p.duration && <p className="text-xs text-gray-400">{p.duration}</p>}
                   </div>
                 </button>
@@ -1532,10 +1532,10 @@ function PoojasTab({ pandit, reload }) {
               <div key={p._id} className="flex items-center gap-3 p-3 bg-saffron-50 rounded-xl border border-saffron-100">
                 <div className="flex-1 min-w-0">
                   <p className="text-sm font-medium text-gray-800 truncate">{p.name}</p>
-                  {p.price > 0 && <p className="text-xs text-gray-400">Catalogue price: â‚¹{p.price}</p>}
+                  {p.price > 0 && <p className="text-xs text-gray-400">Catalogue price: ₹{p.price}</p>}
                 </div>
                 <div className="flex items-center gap-2 shrink-0">
-                  <span className="text-sm text-gray-500 font-medium">â‚¹</span>
+                  <span className="text-sm text-gray-500 font-medium">₹</span>
                   <input
                     type="number"
                     min="0"
@@ -1632,7 +1632,7 @@ function PoojasTab({ pandit, reload }) {
   );
 }
 
-// â”€â”€ Tab 6: Family Information â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+// ── Tab 6: Family Information ───────────────────────────────────
 function FamilyTab({ pandit, reload }) {
   const fi = pandit.familyInfo || {};
   const [form, setForm] = useState({
@@ -1727,7 +1727,7 @@ function FamilyTab({ pandit, reload }) {
   );
 }
 
-// â”€â”€ Tab 7: Bank & UPI Details â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+// ── Tab 7: Bank & UPI Details ───────────────────────────────────
 function PaymentTab({ pandit, reload }) {
   const [bankForm, setBankForm] = useState({
     accountHolderName: pandit.bankDetails?.accountHolderName || '',
@@ -1875,7 +1875,7 @@ function PaymentTab({ pandit, reload }) {
   );
 }
 
-// â”€â”€ Tab 8: KYC Verification â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+// ── Tab 8: KYC Verification ─────────────────────────────────────
 const GOVT_ID_OPTIONS = [
   { value: 'aadhaar',  label: 'Aadhaar Card' },
   { value: 'pan',      label: 'PAN Card' },
@@ -1935,7 +1935,7 @@ function KycVerificationTab({ pandit, reload }) {
       <label className={`flex items-center gap-3 border-2 border-dashed rounded-xl p-4 cursor-pointer transition-colors ${files[field] ? 'border-saffron-400 bg-saffron-50' : 'border-gray-200 hover:border-saffron-300 hover:bg-saffron-50'}`}>
         <Upload size={18} className="text-saffron-500 shrink-0" />
         <span className="text-sm text-gray-600 flex-1 truncate">
-          {files[field] ? files[field].name : (existingUrl ? 'âœ“ Already uploaded (re-upload to replace)' : `Upload ${label} (JPG/PNG)`)}
+          {files[field] ? files[field].name : (existingUrl ? '✓ Already uploaded (re-upload to replace)' : `Upload ${label} (JPG/PNG)`)}
         </span>
         <input type="file" accept="image/*" className="hidden" onChange={handleFile(field)} disabled={!canEdit} />
       </label>
@@ -1969,7 +1969,7 @@ function KycVerificationTab({ pandit, reload }) {
         <div className="flex-1">
           <p className="font-bold text-gray-800">{KYC_STATUS_CONFIG[kycStatus]?.label}</p>
           {kycStatus === 'not_submitted'     && <p className="text-sm text-gray-600 mt-0.5">Upload your government ID to start the verification process.</p>}
-          {kycStatus === 'submitted'         && <p className="text-sm text-gray-600 mt-0.5">Documents submitted. Our team will review within 1â€“2 business days.</p>}
+          {kycStatus === 'submitted'         && <p className="text-sm text-gray-600 mt-0.5">Documents submitted. Our team will review within 1–2 business days.</p>}
           {kycStatus === 'approved'          && <p className="text-sm text-green-700 mt-0.5">Your KYC is verified! You are eligible to receive bookings.</p>}
           {(kycStatus === 'rejected' || kycStatus === 'reupload_required') && pandit.kycRejectionReason && (
             <p className="text-sm mt-1"><span className="font-semibold">Reason: </span>{pandit.kycRejectionReason}</p>
@@ -1977,7 +1977,7 @@ function KycVerificationTab({ pandit, reload }) {
         </div>
       </div>
 
-      {/* Upload form â€” show when canEdit */}
+      {/* Upload form — show when canEdit */}
       {canEdit && (
         <form onSubmit={handleSubmit} className="space-y-5">
           <div className="bg-white rounded-2xl border border-gray-100 p-5 space-y-4">
@@ -2046,7 +2046,7 @@ function KycVerificationTab({ pandit, reload }) {
             ))}
             <div className="bg-saffron-50 border border-saffron-100 rounded-xl p-3">
               <p className="text-xs text-gray-400 mb-1">ID Type</p>
-              <p className="font-semibold text-gray-700 capitalize">{pandit.govtIdType || 'â€”'}</p>
+              <p className="font-semibold text-gray-700 capitalize">{pandit.govtIdType || '—'}</p>
             </div>
             {pandit.govtIdNumber && (
               <div className="bg-saffron-50 border border-saffron-100 rounded-xl p-3">
@@ -2066,7 +2066,7 @@ function KycVerificationTab({ pandit, reload }) {
   );
 }
 
-// â”€â”€ Profile Tab Shell (vertical accordion) â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+// ── Profile Tab Shell (vertical accordion) ──────────────────────
 function ProfileTab({ pandit, reload }) {
   const [open, setOpen] = useState({ personal: true });
   const toggle = (id) => setOpen((prev) => ({ ...prev, [id]: !prev[id] }));
@@ -2124,9 +2124,9 @@ function ProfileTab({ pandit, reload }) {
   );
 }
 
-// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+// ═══════════════════════════════════════════════════════════════
 // MAIN COMPONENT
-// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+// ═══════════════════════════════════════════════════════════════
 export default function PanditDashboard() {
   const [pandit,   setPandit]   = useState(null);
   const [loading,  setLoading]  = useState(true);
@@ -2144,7 +2144,7 @@ export default function PanditDashboard() {
 
   if (loading) return (
     <div className="flex items-center justify-center py-24">
-      <div className="animate-spin text-4xl">ðŸª”</div>
+      <div className="animate-spin text-4xl">🪔</div>
     </div>
   );
 

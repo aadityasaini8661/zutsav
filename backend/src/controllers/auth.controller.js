@@ -51,28 +51,49 @@ exports.sendOTP = async (req, res, next) => {
 
     // Remove any existing OTP for this identifier/purpose
     await OTP.deleteMany({ identifier, purpose: 'registration' });
-
     await OTP.create({ identifier, channel, otp, purpose: 'registration' });
 
-    // Send OTP
+    // Send OTP — if delivery fails we clean up and return an error immediately.
+    // This prevents infinite loading on the frontend (Railway blocks SMTP port 587).
     if (channel === 'email') {
-      await sendEmail(
-        email,
-        'Your Zutsav OTP Code',
-        `<div style="font-family:sans-serif;max-width:480px;margin:0 auto;padding:24px">
-          <h2 style="color:#b91c1c">🪔 Zutsav — Verify Your Account</h2>
-          <p>Namaste <strong>${name}</strong>,</p>
-          <p>Your OTP code for account verification is:</p>
-          <div style="font-size:36px;font-weight:bold;letter-spacing:8px;color:#d97706;text-align:center;padding:20px;background:#fef3c7;border-radius:12px;margin:20px 0">${otp}</div>
-          <p style="color:#6b7280;font-size:14px">This code is valid for <strong>10 minutes</strong>. Do not share it with anyone.</p>
-          <p style="color:#b91c1c">🙏 Team Zutsav</p>
-        </div>`
-      );
+      try {
+        await sendEmail(
+          email,
+          'Your Zutsav OTP Code',
+          `<div style="font-family:sans-serif;max-width:480px;margin:0 auto;padding:24px">
+            <h2 style="color:#b91c1c">Zutsav &mdash; Verify Your Account</h2>
+            <p>Namaste <strong>${name}</strong>,</p>
+            <p>Your OTP code for account verification is:</p>
+            <div style="font-size:36px;font-weight:bold;letter-spacing:8px;color:#d97706;text-align:center;padding:20px;background:#fef3c7;border-radius:12px;margin:20px 0">${otp}</div>
+            <p style="color:#6b7280;font-size:14px">This code is valid for <strong>10 minutes</strong>. Do not share it with anyone.</p>
+            <p style="color:#b91c1c">Team Zutsav</p>
+          </div>`
+        );
+      } catch (emailErr) {
+        // Email delivery failed — remove the pending OTP so the user can retry
+        await OTP.deleteMany({ identifier, purpose: 'registration' });
+        console.error('[OTP] Email delivery failed:', emailErr.message);
+        return res.status(503).json({
+          success: false,
+          message: 'Email delivery failed. Please try WhatsApp OTP or contact support.',
+          hint: 'whatsapp',
+        });
+      }
     } else {
-      await sendWhatsAppText(
-        phone,
-        `🙏 *Zutsav — OTP Verification*\n\nNamaste ${name}!\n\nYour OTP code is: *${otp}*\n\nValid for 10 minutes. Do not share this code.\n\n🙏 Team Zutsav`
-      );
+      try {
+        await sendWhatsAppText(
+          phone,
+          `*Zutsav OTP Verification*\n\nNamaste ${name}!\n\nYour OTP code is: *${otp}*\n\nValid for 10 minutes. Do not share this code.\n\nTeam Zutsav`
+        );
+      } catch (waErr) {
+        await OTP.deleteMany({ identifier, purpose: 'registration' });
+        console.error('[OTP] WhatsApp delivery failed:', waErr.message);
+        return res.status(503).json({
+          success: false,
+          message: 'WhatsApp delivery failed. Please try Email OTP.',
+          hint: 'email',
+        });
+      }
     }
 
     res.json({ success: true, message: `OTP sent to your ${channel === 'email' ? 'email' : 'WhatsApp'}` });
@@ -314,23 +335,33 @@ exports.sendDeletionOTP = async (req, res, next) => {
     await OTP.create({ identifier, channel, otp, purpose: 'account_deletion' });
 
     if (channel === 'email') {
-      await sendEmail(
-        user.email,
-        'Zutsav — Account Deletion Verification',
-        `<div style="font-family:sans-serif;max-width:480px;margin:0 auto;padding:24px">
-          <h2 style="color:#b91c1c">🪔 Zutsav — Account Deletion Request</h2>
-          <p>Namaste <strong>${user.name}</strong>,</p>
-          <p>We received a request to delete your Zutsav account. Enter this code to proceed:</p>
-          <div style="font-size:36px;font-weight:bold;letter-spacing:8px;color:#d97706;text-align:center;padding:20px;background:#fef3c7;border-radius:12px;margin:20px 0">${otp}</div>
-          <p style="color:#6b7280;font-size:14px">This code expires in <strong>10 minutes</strong>. If you did not request this, please ignore this email — your account is safe.</p>
-          <p style="color:#b91c1c">🙏 Team Zutsav</p>
-        </div>`
-      );
+      try {
+        await sendEmail(
+          user.email,
+          'Zutsav — Account Deletion Verification',
+          `<div style="font-family:sans-serif;max-width:480px;margin:0 auto;padding:24px">
+            <h2 style="color:#b91c1c">Zutsav &mdash; Account Deletion Request</h2>
+            <p>Namaste <strong>${user.name}</strong>,</p>
+            <p>We received a request to delete your Zutsav account. Enter this code to proceed:</p>
+            <div style="font-size:36px;font-weight:bold;letter-spacing:8px;color:#d97706;text-align:center;padding:20px;background:#fef3c7;border-radius:12px;margin:20px 0">${otp}</div>
+            <p style="color:#6b7280;font-size:14px">This code expires in <strong>10 minutes</strong>. If you did not request this, please ignore this email.</p>
+            <p style="color:#b91c1c">Team Zutsav</p>
+          </div>`
+        );
+      } catch (emailErr) {
+        await OTP.deleteMany({ identifier, purpose: 'account_deletion' });
+        return res.status(503).json({ success: false, message: 'Email delivery failed. Please try WhatsApp.', hint: 'whatsapp' });
+      }
     } else {
-      await sendWhatsAppText(
-        user.phone,
-        `🪔 *Zutsav — Account Deletion Verification*\n\nNamaste ${user.name},\n\nYour OTP for account deletion: *${otp}*\n\nValid for 10 minutes. If you did not request deletion, ignore this message.\n\n🙏 Team Zutsav`
-      );
+      try {
+        await sendWhatsAppText(
+          user.phone,
+          `*Zutsav — Account Deletion Verification*\n\nNamaste ${user.name},\n\nYour OTP for account deletion: *${otp}*\n\nValid for 10 minutes. If you did not request deletion, ignore this message.\n\nTeam Zutsav`
+        );
+      } catch (waErr) {
+        await OTP.deleteMany({ identifier, purpose: 'account_deletion' });
+        return res.status(503).json({ success: false, message: 'WhatsApp delivery failed. Please try Email.', hint: 'email' });
+      }
     }
 
     res.json({ success: true, message: `Verification code sent to your ${channel === 'email' ? 'email' : 'WhatsApp'}` });

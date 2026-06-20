@@ -1,4 +1,4 @@
-﻿import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Plus, Edit3, Trash2, Eye, CheckCircle, Clock, XCircle, AlertCircle } from 'lucide-react';
 import toast from 'react-hot-toast';
 import API from '../api/axios';
@@ -65,7 +65,7 @@ function PoojaForm({ categories, initial, onSave, onCancel, loading }) {
 
       <div className="grid grid-cols-2 gap-4">
         <div>
-          <label className="label">Price (â‚¹) *</label>
+          <label className="label">Price (₹) *</label>
           <input type="number" min="0" className="input" value={form.price} onChange={set('price')} placeholder="e.g. 1100" />
         </div>
         <div>
@@ -153,7 +153,7 @@ export default function PanditMyPoojas() {
     setSaving(true);
     try {
       await API.patch(`/pandit/my-poojas/${editing._id}`, fd, { headers: { 'Content-Type': 'multipart/form-data' } });
-      toast.success('Pooja updated â€” pending re-approval');
+      toast.success('Pooja updated — pending re-approval');
       setView('list');
       setEditing(null);
       loadPoojas();
@@ -185,7 +185,7 @@ export default function PanditMyPoojas() {
   if (view === 'create') return (
     <div>
       <div className="flex items-center gap-3 mb-6">
-        <button onClick={() => setView('list')} className="text-sm text-saffron-600 hover:underline">â† Back</button>
+        <button onClick={() => setView('list')} className="text-sm text-saffron-600 hover:underline">← Back</button>
         <h1 className="text-xl font-bold text-gray-800">Add New Pooja</h1>
       </div>
       <div className="bg-white rounded-2xl shadow-sm border border-gray-100 p-6">
@@ -197,7 +197,7 @@ export default function PanditMyPoojas() {
   if (view === 'edit') return (
     <div>
       <div className="flex items-center gap-3 mb-6">
-        <button onClick={() => { setView('list'); setEditing(null); }} className="text-sm text-saffron-600 hover:underline">â† Back</button>
+        <button onClick={() => { setView('list'); setEditing(null); }} className="text-sm text-saffron-600 hover:underline">← Back</button>
         <h1 className="text-xl font-bold text-gray-800">Edit Pooja</h1>
       </div>
       <div className="bg-white rounded-2xl shadow-sm border border-gray-100 p-6">
@@ -228,7 +228,7 @@ export default function PanditMyPoojas() {
         </div>
       ) : poojas.length === 0 ? (
         <div className="text-center py-16 bg-white rounded-2xl border border-gray-100">
-          <span className="text-5xl block mb-3">ðŸª”</span>
+          <span className="text-5xl block mb-3">🪔</span>
           <p className="text-gray-500">No poojas yet. Add your first pooja to get started.</p>
           <button onClick={() => setView('create')} className="btn-primary mt-4 px-6 py-2 text-sm">
             Add First Pooja
@@ -240,7 +240,7 @@ export default function PanditMyPoojas() {
             <div key={p._id} className="bg-white rounded-2xl border border-gray-100 p-4 flex items-center gap-4 shadow-sm">
               {p.image
                 ? <img src={`https://zutsav-production.up.railway.app/${p.image}`} alt="" className="w-16 h-16 rounded-xl object-cover shrink-0" />
-                : <div className="w-16 h-16 rounded-xl bg-saffron-50 flex items-center justify-center shrink-0 text-2xl">ðŸª”</div>
+                : <div className="w-16 h-16 rounded-xl bg-saffron-50 flex items-center justify-center shrink-0 text-2xl">🪔</div>
               }
               <div className="flex-1 min-w-0">
                 <div className="flex flex-wrap items-center gap-2">
@@ -250,7 +250,7 @@ export default function PanditMyPoojas() {
                     {p.approvalStatus.charAt(0).toUpperCase() + p.approvalStatus.slice(1)}
                   </span>
                 </div>
-                <p className="text-sm text-gray-500 mt-0.5">{p.categoryId?.name} Â· â‚¹{p.price?.toLocaleString()}</p>
+                <p className="text-sm text-gray-500 mt-0.5">{p.categoryId?.name} · ₹{p.price?.toLocaleString()}</p>
                 {p.adminNote && (
                   <p className="text-xs text-red-600 mt-1">Admin note: {p.adminNote}</p>
                 )}

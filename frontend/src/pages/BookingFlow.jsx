@@ -1,4 +1,4 @@
-﻿import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import { Clock, CheckCircle, ArrowRight, ArrowLeft, Shield, Sparkles } from 'lucide-react';
 import toast from 'react-hot-toast';
@@ -7,9 +7,9 @@ import { useAuth } from '../context/AuthContext';
 import PincodeInput from '../components/shared/PincodeInput';
 
 const STEPS = [
-  { id: 0, label: 'Service',  icon: 'ðŸ™', desc: 'Review your pooja'     },
-  { id: 1, label: 'Details',  icon: 'ðŸ“‹', desc: 'Your ceremony details' },
-  { id: 2, label: 'Confirm',  icon: 'âœ¨', desc: 'Review & pay'          },
+  { id: 0, label: 'Service',  icon: '🙏', desc: 'Review your pooja'     },
+  { id: 1, label: 'Details',  icon: '📋', desc: 'Your ceremony details' },
+  { id: 2, label: 'Confirm',  icon: '✨', desc: 'Review & pay'          },
 ];
 
 export default function BookingFlow() {
@@ -96,7 +96,7 @@ export default function BookingFlow() {
   if (loading) return (
     <div className="min-h-screen flex items-center justify-center" style={{ background: '#FAF6EE' }}>
       <div className="text-center">
-        <div className="text-5xl animate-float mb-4">ðŸª”</div>
+        <div className="text-5xl animate-float mb-4">🪔</div>
         <p className="text-gray-400 text-sm font-sans">Loading ceremony details...</p>
       </div>
     </div>
@@ -112,7 +112,7 @@ export default function BookingFlow() {
     <div className="min-h-screen py-10 sacred-pattern" style={{ background: '#FAF6EE' }}>
       <div className="max-w-2xl mx-auto px-4">
 
-        {/* â”€â”€ Step progress indicator â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */}
+        {/* ── Step progress indicator ─────────────────────── */}
         <div className="mb-10">
           <div className="flex items-center justify-between relative">
             {/* Connecting track */}
@@ -150,7 +150,7 @@ export default function BookingFlow() {
           </div>
         </div>
 
-        {/* â”€â”€ Step 0: Service Overview â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */}
+        {/* ── Step 0: Service Overview ────────────────────── */}
         {step === 0 && (
           <div className="bg-white rounded-3xl shadow-premium overflow-hidden animate-fade-in">
             {/* Pooja hero image or gradient header */}
@@ -166,7 +166,7 @@ export default function BookingFlow() {
               <div className="h-36 flex items-center justify-center relative overflow-hidden"
                 style={{ background: 'linear-gradient(135deg, #FF6B00, #ff9020)' }}>
                 <div className="absolute inset-0 sacred-pattern opacity-20" />
-                <span className="text-6xl relative z-10">ðŸª”</span>
+                <span className="text-6xl relative z-10">🪔</span>
               </div>
             )}
 
@@ -227,7 +227,7 @@ export default function BookingFlow() {
                 <div>
                   <p className="text-xs text-gray-400 mb-0.5 font-sans">Total ceremony fee</p>
                   <span className="font-display text-3xl font-bold text-saffron-600" style={{ letterSpacing: '-0.02em' }}>
-                    â‚¹{pooja.price.toLocaleString('en-IN')}
+                    ₹{pooja.price.toLocaleString('en-IN')}
                   </span>
                 </div>
                 <button onClick={handleNext} className="btn-primary inline-flex items-center gap-2 px-6 py-3 text-base font-sans">
@@ -238,13 +238,13 @@ export default function BookingFlow() {
           </div>
         )}
 
-        {/* â”€â”€ Step 1: Ceremony Details â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */}
+        {/* ── Step 1: Ceremony Details ────────────────────── */}
         {step === 1 && (
           <div className="bg-white rounded-3xl shadow-premium p-6 md:p-8 animate-fade-in">
             <div className="flex items-center gap-3 mb-7">
               <div className="w-10 h-10 rounded-2xl flex items-center justify-center text-xl"
                 style={{ background: 'linear-gradient(135deg, #FF6B00, #ff9020)' }}>
-                ðŸ“‹
+                📋
               </div>
               <div>
                 <h2 className="font-display font-bold text-gray-900 text-2xl" style={{ letterSpacing: '-0.02em' }}>Your Details</h2>
@@ -365,13 +365,13 @@ export default function BookingFlow() {
           </div>
         )}
 
-        {/* â”€â”€ Step 2: Review & Pay â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */}
+        {/* ── Step 2: Review & Pay ────────────────────────── */}
         {step === 2 && (
           <div className="bg-white rounded-3xl shadow-premium p-6 md:p-8 animate-fade-in">
             <div className="flex items-center gap-3 mb-7">
               <div className="w-10 h-10 rounded-2xl flex items-center justify-center text-xl"
                 style={{ background: 'linear-gradient(135deg, #FF6B00, #ff9020)' }}>
-                âœ¨
+                ✨
               </div>
               <div>
                 <h2 className="font-display font-bold text-gray-900 text-2xl" style={{ letterSpacing: '-0.02em' }}>Review &amp; Pay</h2>
@@ -385,7 +385,7 @@ export default function BookingFlow() {
                 <div className="w-10 h-10 rounded-xl overflow-hidden bg-saffron-100 shrink-0">
                   {pooja.image
                     ? <img src={`https://zutsav-production.up.railway.app/${pooja.image}`} alt={pooja.name} className="w-full h-full object-cover" />
-                    : <div className="w-full h-full flex items-center justify-center text-xl">ðŸª”</div>
+                    : <div className="w-full h-full flex items-center justify-center text-xl">🪔</div>
                   }
                 </div>
                 <div>
@@ -413,7 +413,7 @@ export default function BookingFlow() {
               <div className="space-y-1 text-sm font-sans">
                 <p className="text-gray-700"><span className="text-gray-400">Name: </span>{details.name}</p>
                 <p className="text-gray-700"><span className="text-gray-400">Phone: </span>{details.phone}</p>
-                <p className="text-gray-700"><span className="text-gray-400">Address: </span>{details.address}{details.city ? `, ${details.city}` : ''}{details.state ? `, ${details.state}` : ''} â€” {details.pincode}</p>
+                <p className="text-gray-700"><span className="text-gray-400">Address: </span>{details.address}{details.city ? `, ${details.city}` : ''}{details.state ? `, ${details.state}` : ''} — {details.pincode}</p>
               </div>
               {details.specialNote && (
                 <div className="mt-3 pt-3 border-t border-gray-100">
@@ -425,7 +425,7 @@ export default function BookingFlow() {
             {/* Trust bar */}
             <div className="flex items-center gap-3 py-3 px-4 rounded-xl border border-blue-100 bg-blue-50 mb-4">
               <Shield size={15} className="text-blue-500 shrink-0" />
-              <p className="text-xs text-blue-700 font-sans">Secure payment via PhonePe Â· UPI, Cards, Net Banking & Wallets supported</p>
+              <p className="text-xs text-blue-700 font-sans">Secure payment via PhonePe · UPI, Cards, Net Banking & Wallets supported</p>
             </div>
 
             {/* Total + pay */}
@@ -434,7 +434,7 @@ export default function BookingFlow() {
               <div>
                 <p className="text-xs text-gray-400 font-sans">Total Amount</p>
                 <span className="font-display text-3xl font-bold text-saffron-600" style={{ letterSpacing: '-0.02em' }}>
-                  â‚¹{pooja.price.toLocaleString('en-IN')}
+                  ₹{pooja.price.toLocaleString('en-IN')}
                 </span>
               </div>
               <div className="flex items-center gap-1.5 bg-white border border-emerald-200 text-emerald-600 text-xs font-bold px-3 py-1.5 rounded-full font-sans">
@@ -447,7 +447,7 @@ export default function BookingFlow() {
                 <ArrowLeft size={15} /> Edit
               </button>
               <button onClick={handlePay} disabled={paying} className="btn-primary flex-1 py-3.5 text-base font-sans">
-                {paying ? 'Processing...' : `Pay â‚¹${pooja.price.toLocaleString('en-IN')} ðŸ™`}
+                {paying ? 'Processing...' : `Pay ₹${pooja.price.toLocaleString('en-IN')} 🙏`}
               </button>
             </div>
           </div>
@@ -457,7 +457,7 @@ export default function BookingFlow() {
         <div className="mt-6 flex items-center justify-center gap-6 text-xs text-gray-400 font-sans">
           <span className="flex items-center gap-1.5"><CheckCircle size={12} className="text-saffron-400" /> Verified Pandit</span>
           <span className="flex items-center gap-1.5"><Shield size={12} className="text-saffron-400" /> Secure Payment</span>
-          <span className="flex items-center gap-1.5"><Sparkles size={12} className="text-saffron-400" /> 4.9â˜… Rated</span>
+          <span className="flex items-center gap-1.5"><Sparkles size={12} className="text-saffron-400" /> 4.9★ Rated</span>
         </div>
       </div>
     </div>

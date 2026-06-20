@@ -1,4 +1,4 @@
-﻿import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { ShoppingCart, Plus, Minus, X, Search, Package, ArrowRight, Flame } from 'lucide-react';
 import toast from 'react-hot-toast';
 import API from '../api/axios';
@@ -12,7 +12,7 @@ const CAT_LABELS = {
   yantra: 'Yantra', incense: 'Incense', idol: 'Idols', other: 'Other',
 };
 const CAT_ICONS = {
-  all: 'âœ¨', samagri: 'ðŸª”', rudraksha: 'ðŸ“¿', yantra: 'ðŸ”¯', incense: 'ðŸŒ¿', idol: 'ðŸ›•', other: 'ðŸŽ',
+  all: '✨', samagri: '🪔', rudraksha: '📿', yantra: '🔯', incense: '🌿', idol: '🛕', other: '🎁',
 };
 
 const CART_KEY = 'zutsav_cart';
@@ -54,7 +54,7 @@ export default function Marketplace() {
       .finally(()      => setLoading(false));
   }, [category, search]);
 
-  // â”€â”€ Cart helpers â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+  // ── Cart helpers ─────────────────────────────────────────────────────────────
 
   const requireAuth = (message) => { setLoginMsg(message); setShowLogin(true); return false; };
 
@@ -104,7 +104,7 @@ export default function Marketplace() {
   const cartItemCount  = cart.reduce((s, i) => s + i.quantity, 0);
   const cartTotal      = cart.reduce((s, i) => s + i.price * i.quantity, 0);
 
-  // â”€â”€ PhonePe checkout â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+  // ── PhonePe checkout ─────────────────────────────────────────────────────────
 
   const handleCheckout = async () => {
     if (!isAuthenticated) { requireAuth('Please login to place your order.'); return; }
@@ -117,7 +117,7 @@ export default function Marketplace() {
         items: cart.map(({ productId, quantity }) => ({ productId, quantity })),
         shippingAddress: address,
       });
-      // Clear cart before redirect â€” payment is being processed
+      // Clear cart before redirect — payment is being processed
       localStorage.removeItem(CART_KEY);
       setCart([]);
       // Redirect to PhonePe payment page
@@ -128,13 +128,13 @@ export default function Marketplace() {
     }
   };
 
-  // â”€â”€ Render â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+  // ── Render ───────────────────────────────────────────────────────────────────
 
   return (
     <div className="min-h-screen" style={{ background: 'var(--t-bg)' }}>
       <LoginModal isOpen={showLogin} onClose={() => setShowLogin(false)} message={loginMsg} />
 
-      {/* â”€â”€ Hero header â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */}
+      {/* ── Hero header ────────────────────────────────────────── */}
       <div
         className="relative overflow-hidden border-b"
         style={{ background: 'var(--t-surface)', borderColor: 'var(--t-border)' }}
@@ -198,7 +198,7 @@ export default function Marketplace() {
         </div>
       </div>
 
-      {/* â”€â”€ Products grid â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */}
+      {/* ── Products grid ────────────────────────────────────── */}
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10">
 
         {/* Guest notice */}
@@ -245,13 +245,13 @@ export default function Marketplace() {
           <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-5">
             {products.map((p) => (
               <div key={p._id} className="group rounded-3xl overflow-hidden transition-all duration-300 border" style={{ background: 'var(--t-card)', borderColor: 'var(--t-border)' }}>
-                {/* Product image â€” 4:5 ratio */}
+                {/* Product image — 4:5 ratio */}
                 <div className="relative overflow-hidden bg-saffron-50" style={{ paddingTop: '125%' }}>
                   <div className="absolute inset-0">
                     {p.images?.[0]
                       ? <img src={`https://zutsav-production.up.railway.app/${p.images[0]}`} alt={p.name}
                           className="w-full h-full object-cover group-hover:scale-106 transition-transform duration-700" style={{ '--tw-scale-x': '1.06', '--tw-scale-y': '1.06' }} />
-                      : <div className="w-full h-full flex items-center justify-center text-6xl bg-gradient-to-br from-saffron-50 to-orange-50">ðŸª”</div>
+                      : <div className="w-full h-full flex items-center justify-center text-6xl bg-gradient-to-br from-saffron-50 to-orange-50">🪔</div>
                     }
                     {/* Hover overlay with gradient */}
                     <div className="absolute inset-0 bg-gradient-to-t from-black/30 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-400" />
@@ -288,10 +288,10 @@ export default function Marketplace() {
                   <div className="flex items-center justify-between gap-2">
                     <div>
                       <span className="font-display text-lg font-bold text-saffron-600">
-                        â‚¹{(p.salePrice || p.price).toLocaleString('en-IN')}
+                        ₹{(p.salePrice || p.price).toLocaleString('en-IN')}
                       </span>
                       {p.salePrice && p.salePrice < p.price && (
-                        <span className="text-xs text-gray-400 line-through ml-1.5 font-sans">â‚¹{p.price.toLocaleString('en-IN')}</span>
+                        <span className="text-xs text-gray-400 line-through ml-1.5 font-sans">₹{p.price.toLocaleString('en-IN')}</span>
                       )}
                     </div>
                     <button
@@ -313,7 +313,7 @@ export default function Marketplace() {
         )}
       </div>
 
-      {/* â”€â”€ Cart Drawer â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */}
+      {/* ── Cart Drawer ─────────────────────────────────────── */}
       {showCart && (
         <div className="fixed inset-0 z-50 flex">
           <div className="flex-1 bg-black/50 backdrop-blur-sm" onClick={() => setShowCart(false)} />
@@ -347,13 +347,13 @@ export default function Marketplace() {
                       <div className="w-14 h-14 bg-saffron-50 rounded-xl overflow-hidden shrink-0">
                         {item.image
                           ? <img src={`https://zutsav-production.up.railway.app/${item.image}`} alt="" className="w-full h-full object-cover" />
-                          : <div className="w-full h-full flex items-center justify-center text-xl">ðŸª”</div>
+                          : <div className="w-full h-full flex items-center justify-center text-xl">🪔</div>
                         }
                       </div>
                       <div className="flex-1 min-w-0">
                         <p className="text-sm font-semibold text-gray-800 line-clamp-1 font-sans">{item.name}</p>
                         <p className="font-display font-bold text-saffron-600 text-sm mt-0.5">
-                          â‚¹{(item.price * item.quantity).toLocaleString('en-IN')}
+                          ₹{(item.price * item.quantity).toLocaleString('en-IN')}
                         </p>
                       </div>
                       <div className="flex items-center gap-1 shrink-0">
@@ -379,7 +379,7 @@ export default function Marketplace() {
                   <div className="flex justify-between items-center">
                     <span className="text-sm text-gray-500 font-sans">Subtotal ({cartItemCount} items)</span>
                     <span className="font-display font-bold text-gray-900 text-xl" style={{ letterSpacing: '-0.01em' }}>
-                      â‚¹{cartTotal.toLocaleString('en-IN')}
+                      ₹{cartTotal.toLocaleString('en-IN')}
                     </span>
                   </div>
                   <button
@@ -394,7 +394,7 @@ export default function Marketplace() {
         </div>
       )}
 
-      {/* â”€â”€ Checkout Modal â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */}
+      {/* ── Checkout Modal ──────────────────────────────────── */}
       {showCheckout && (
         <div className="fixed inset-0 z-50 flex items-center justify-center px-4 bg-black/50 backdrop-blur-sm">
           <div className="rounded-3xl shadow-premium w-full max-w-md max-h-[90vh] overflow-y-auto" style={{ background: 'var(--t-card)', border: '1px solid var(--t-border)' }}>
@@ -451,7 +451,7 @@ export default function Marketplace() {
                   <p className="text-xs text-gray-400 font-sans mt-0.5">{cartItemCount} item{cartItemCount !== 1 ? 's' : ''}</p>
                 </div>
                 <span className="font-display text-2xl font-bold text-saffron-600" style={{ letterSpacing: '-0.02em' }}>
-                  â‚¹{cartTotal.toLocaleString('en-IN')}
+                  ₹{cartTotal.toLocaleString('en-IN')}
                 </span>
               </div>
 
@@ -460,12 +460,12 @@ export default function Marketplace() {
                 {paying ? (
                   <>Processing <span className="animate-pulse-soft">...</span></>
                 ) : (
-                  <>Pay â‚¹{cartTotal.toLocaleString('en-IN')} <span>ðŸ™</span></>
+                  <>Pay ₹{cartTotal.toLocaleString('en-IN')} <span>🙏</span></>
                 )}
               </button>
 
               <p className="text-xs text-center text-gray-400 font-sans">
-                ðŸ”’ Secured by PhonePe Â· UPI, Cards, Net Banking accepted
+                🔒 Secured by PhonePe · UPI, Cards, Net Banking accepted
               </p>
             </div>
           </div>

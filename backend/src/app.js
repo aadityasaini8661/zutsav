@@ -7,6 +7,17 @@ const rateLimit = require('express-rate-limit');
 
 const app = express();
 
+// Force UTF-8 charset on every JSON response — prevents browser mojibake
+// when a reverse proxy (Railway/Vercel) strips the charset from Content-Type.
+app.use((req, res, next) => {
+  const _json = res.json.bind(res);
+  res.json = (body) => {
+    res.setHeader('Content-Type', 'application/json; charset=utf-8');
+    return _json(body);
+  };
+  next();
+});
+
 // Security
 app.use(helmet({ crossOriginResourcePolicy: { policy: 'cross-origin' } }));
 const allowedOrigins = [

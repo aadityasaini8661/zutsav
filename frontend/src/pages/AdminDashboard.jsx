@@ -1,4 +1,4 @@
-﻿import React, { useEffect, useState, useRef, useCallback } from 'react';
+import React, { useEffect, useState, useRef, useCallback } from 'react';
 import { useSearchParams } from 'react-router-dom';
 import { Users, BookOpen, IndianRupee, Clock, CheckCircle, XCircle, Plus, User, LayoutDashboard, CalendarDays, ShoppingBag, MapPin, Tv, Package, Star, Trash2, Gift, Sparkles, Percent, Tag, Mail, ClipboardList, Truck, ChevronDown, RotateCcw, Search, Settings, CreditCard, MessageSquare, Cpu, Image, Shield, Save, Eye, EyeOff, Upload, AlertTriangle, ShieldCheck, FileText } from 'lucide-react';
 import CommunicationCenter from '../components/admin/CommunicationCenter';
@@ -42,7 +42,7 @@ export default function AdminDashboard() {
   );
 }
 
-// â”€â”€â”€ Dashboard Stats â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+// ─── Dashboard Stats ─────────────────────────────────────────
 function DashboardTab() {
   const [stats, setStats] = useState(null);
   const [recent, setRecent] = useState([]);
@@ -61,7 +61,7 @@ function DashboardTab() {
     { label: 'Total Orders',     value: stats.totalOrders || 0, icon: Package,     bgStyle: { background: 'rgba(249,115,22,0.1)' }, iconStyle: { color: '#ea580c' } },
     { label: 'Pending Orders',   value: stats.pendingOrders || 0, icon: Clock,     bgStyle: { background: '#fefce8' }, iconStyle: { color: '#d97706' } },
     { label: 'Low Stock Items',  value: stats.lowStockProducts || 0, icon: XCircle, bgStyle: { background: '#fef2f2' }, iconStyle: { color: '#dc2626' } },
-    { label: 'Total Revenue',    value: `â‚¹${(stats.totalRevenue||0).toLocaleString('en-IN')}`, icon: IndianRupee, bgStyle: { background: 'rgba(27,31,59,0.06)' }, iconStyle: { color: '#1B1F3B' } },
+    { label: 'Total Revenue',    value: `₹${(stats.totalRevenue||0).toLocaleString('en-IN')}`, icon: IndianRupee, bgStyle: { background: 'rgba(27,31,59,0.06)' }, iconStyle: { color: '#1B1F3B' } },
   ];
 
   return (
@@ -99,7 +99,7 @@ function DashboardTab() {
                   <td className="py-2.5 font-mono text-xs text-gray-400">{b.bookingNumber}</td>
                   <td className="py-2.5 font-semibold text-gray-800">{b.userId?.name}</td>
                   <td className="py-2.5 text-gray-600">{b.poojaId?.name}</td>
-                  <td className="py-2.5 font-bold" style={{ color: '#D4AF37', fontFamily: '"Cormorant Garamond"', fontSize: '1rem' }}>â‚¹{b.amount?.toLocaleString('en-IN')}</td>
+                  <td className="py-2.5 font-bold" style={{ color: '#D4AF37', fontFamily: '"Cormorant Garamond"', fontSize: '1rem' }}>₹{b.amount?.toLocaleString('en-IN')}</td>
                   <td className="py-2.5 text-gray-400 text-xs">{new Date(b.createdAt).toLocaleDateString('en-IN')}</td>
                 </tr>
               ))}
@@ -111,7 +111,7 @@ function DashboardTab() {
   );
 }
 
-// â”€â”€â”€ Bookings Tab â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+// ─── Bookings Tab ─────────────────────────────────────────────
 function BookingsTab() {
   const [bookings,       setBookings]       = useState([]);
   const [loading,        setLoading]        = useState(true);
@@ -246,9 +246,9 @@ function BookingsTab() {
 
   const coverageLabel = (p) => {
     if (p.coverageType === 'radius') return `${p.coverageRadiusKm} km radius`;
-    if (p.coverageType === 'city')   return `City: ${p.city || 'â€”'}`;
-    if (p.coverageType === 'district') return `District: ${p.district || 'â€”'}`;
-    if (p.coverageType === 'state') return `State: ${p.state || 'â€”'}`;
+    if (p.coverageType === 'city')   return `City: ${p.city || '—'}`;
+    if (p.coverageType === 'district') return `District: ${p.district || '—'}`;
+    if (p.coverageType === 'state') return `State: ${p.state || '—'}`;
     return 'Pan India';
   };
 
@@ -283,14 +283,14 @@ function BookingsTab() {
                       <p className="text-xs text-gray-400">{b.userDetails?.phone}</p>
                     </td>
                     <td className="px-4 py-3">
-                      <p className="text-xs text-gray-600">{b.userDetails?.city || 'â€”'}</p>
+                      <p className="text-xs text-gray-600">{b.userDetails?.city || '—'}</p>
                       <p className="text-xs text-gray-400">{b.userDetails?.state || ''}</p>
                     </td>
                     <td className="px-4 py-3 text-gray-700">{b.poojaId?.name}</td>
                     <td className="px-4 py-3 text-gray-500 text-xs">{b.scheduledDate?.split('T')[0]} {b.scheduledTime}</td>
-                    <td className="px-4 py-3 font-bold text-saffron-600">â‚¹{b.amount?.toLocaleString('en-IN')}</td>
+                    <td className="px-4 py-3 font-bold text-saffron-600">₹{b.amount?.toLocaleString('en-IN')}</td>
                     <td className="px-4 py-3"><span className={statusColor[b.status] || 'badge-pending'}>{statusLabel[b.status]}</span></td>
-                    <td className="px-4 py-3 text-xs text-gray-500">{b.panditId?.name || 'â€”'}</td>
+                    <td className="px-4 py-3 text-xs text-gray-500">{b.panditId?.name || '—'}</td>
                     <td className="px-4 py-3">
                       <div className="flex flex-col gap-1.5">
                         {b.status === 'paid' && (
@@ -327,7 +327,7 @@ function BookingsTab() {
                           </button>
                         )}
                         {b.status === 'completed' && b.payout?.status === 'completed' && (
-                          <span className="text-[10px] text-green-600 font-semibold bg-green-50 px-2 py-1 rounded-lg">Paid â‚¹{b.payout.amount}</span>
+                          <span className="text-[10px] text-green-600 font-semibold bg-green-50 px-2 py-1 rounded-lg">Paid ₹{b.payout.amount}</span>
                         )}
                       </div>
                     </td>
@@ -353,11 +353,11 @@ function BookingsTab() {
               <div className="flex items-start justify-between gap-2">
                 <div>
                   <p className="font-semibold text-gray-700">{selected.poojaId?.name}</p>
-                  <p className="text-gray-500">{selected.scheduledDate?.split('T')[0]} Â· {selected.scheduledTime}</p>
+                  <p className="text-gray-500">{selected.scheduledDate?.split('T')[0]} · {selected.scheduledTime}</p>
                 </div>
                 <div className="text-right shrink-0">
                   <p className="text-xs text-gray-400">Platform price</p>
-                  <p className="font-bold text-saffron-600">â‚¹{selected.poojaId?.price?.toLocaleString('en-IN') || selected.amount?.toLocaleString('en-IN') || 'â€”'}</p>
+                  <p className="font-bold text-saffron-600">₹{selected.poojaId?.price?.toLocaleString('en-IN') || selected.amount?.toLocaleString('en-IN') || '—'}</p>
                 </div>
               </div>
             </div>
@@ -365,7 +365,7 @@ function BookingsTab() {
             {/* User location info */}
             <div className="border border-blue-100 bg-blue-50 rounded-xl p-3 mb-4 text-xs">
               <p className="font-bold text-blue-700 mb-1">User Location</p>
-              <p className="text-blue-800">{selected.userDetails?.name} Â· {selected.userDetails?.phone}</p>
+              <p className="text-blue-800">{selected.userDetails?.name} · {selected.userDetails?.phone}</p>
               <p className="text-blue-600">{[selected.userDetails?.address, selected.userDetails?.city, selected.userDetails?.district, selected.userDetails?.state, selected.userDetails?.pincode].filter(Boolean).join(', ')}</p>
             </div>
 
@@ -385,13 +385,13 @@ function BookingsTab() {
             )}
 
             {loadingPandits ? (
-              <div className="text-center py-6 text-gray-400 text-sm">Loading eligible panditsâ€¦</div>
+              <div className="text-center py-6 text-gray-400 text-sm">Loading eligible pandits…</div>
             ) : pandits.length === 0 ? (
               <p className="text-red-500 text-sm bg-red-50 p-3 rounded-xl mb-4">No available pandits for this date.</p>
             ) : (
               <>
                 <p className="text-xs text-gray-500 mb-2">
-                  {pandits.length} pandit{pandits.length !== 1 ? 's' : ''} available Â· <span className="text-green-600">Green = within coverage</span> Â· <span className="text-red-500">Red = outside area</span>
+                  {pandits.length} pandit{pandits.length !== 1 ? 's' : ''} available · <span className="text-green-600">Green = within coverage</span> · <span className="text-red-500">Red = outside area</span>
                 </p>
                 <div className="space-y-2 mb-4 max-h-64 overflow-y-auto">
                   {pandits.map((p) => {
@@ -422,7 +422,7 @@ function BookingsTab() {
                             )}
                           </div>
                           <p className="text-[11px] text-gray-500 mt-0.5">{p.phone || p.email || ''}</p>
-                          <p className="text-[11px] text-gray-400">{p.city || 'â€”'}{p.state ? `, ${p.state}` : ''}</p>
+                          <p className="text-[11px] text-gray-400">{p.city || '—'}{p.state ? `, ${p.state}` : ''}</p>
                           <div className="flex items-center gap-2 mt-1 flex-wrap">
                             {p.distanceKm !== null && (
                               <span className="text-[10px] font-bold text-indigo-600 bg-indigo-50 px-1.5 py-0.5 rounded-full">{p.distanceKm} km away</span>
@@ -432,7 +432,7 @@ function BookingsTab() {
                               <span className="text-[10px] text-gray-500 bg-gray-100 px-1.5 py-0.5 rounded-full">{p.experience}y exp</span>
                             )}
                             {p.rating > 0 && (
-                              <span className="text-[10px] text-yellow-600 bg-yellow-50 px-1.5 py-0.5 rounded-full">â˜… {p.rating.toFixed(1)} ({p.totalReviews || 0})</span>
+                              <span className="text-[10px] text-yellow-600 bg-yellow-50 px-1.5 py-0.5 rounded-full">★ {p.rating.toFixed(1)} ({p.totalReviews || 0})</span>
                             )}
                             {p.totalBookings > 0 && (
                               <span className="text-[10px] text-gray-500 bg-gray-50 px-1.5 py-0.5 rounded-full">{p.totalBookings} bookings</span>
@@ -442,11 +442,11 @@ function BookingsTab() {
                           {(p.expectedChargesForPooja !== null && p.expectedChargesForPooja !== undefined) && (
                             <div className="mt-1.5 flex items-center gap-2 flex-wrap">
                               <span className="text-[10px] font-bold text-green-700 bg-green-50 px-1.5 py-0.5 rounded-full">
-                                Pandit expects â‚¹{p.expectedChargesForPooja.toLocaleString('en-IN')}
+                                Pandit expects ₹{p.expectedChargesForPooja.toLocaleString('en-IN')}
                               </span>
                               {selected.poojaId?.price && (
                                 <span className="text-[10px] font-bold text-saffron-700 bg-saffron-50 px-1.5 py-0.5 rounded-full">
-                                  Platform â‚¹{selected.poojaId.price.toLocaleString('en-IN')}
+                                  Platform ₹{selected.poojaId.price.toLocaleString('en-IN')}
                                 </span>
                               )}
                             </div>
@@ -462,10 +462,10 @@ function BookingsTab() {
             {/* Agreed fare amount (admin-only) */}
             <div className="mb-4">
               <label className="block text-xs font-bold text-gray-600 uppercase tracking-wide mb-1.5">
-                Final Agreed Fare Amount <span className="text-gray-400 font-normal normal-case">(optional â€” admin only, not shown to user or pandit)</span>
+                Final Agreed Fare Amount <span className="text-gray-400 font-normal normal-case">(optional — admin only, not shown to user or pandit)</span>
               </label>
               <div className="relative">
-                <span className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400 font-semibold text-sm">â‚¹</span>
+                <span className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400 font-semibold text-sm">₹</span>
                 <input
                   type="number" min="0"
                   className="input pl-7"
@@ -496,11 +496,11 @@ function BookingsTab() {
 
             {/* Booking summary */}
             <div className="bg-saffron-50 rounded-xl p-4 mb-4 text-sm space-y-1">
-              <p className="font-semibold text-gray-700">#{payoutBooking.bookingNumber} Â· {payoutBooking.poojaId?.name}</p>
-              <p className="text-gray-500">Pandit: <strong>{payoutBooking.panditId?.name || 'â€”'}</strong></p>
-              <p className="text-gray-500">Booking amount: <strong>â‚¹{payoutBooking.amount?.toLocaleString('en-IN')}</strong></p>
+              <p className="font-semibold text-gray-700">#{payoutBooking.bookingNumber} · {payoutBooking.poojaId?.name}</p>
+              <p className="text-gray-500">Pandit: <strong>{payoutBooking.panditId?.name || '—'}</strong></p>
+              <p className="text-gray-500">Booking amount: <strong>₹{payoutBooking.amount?.toLocaleString('en-IN')}</strong></p>
               {payoutAction === 'paid' && (
-                <p className="text-gray-700 font-medium">Approved payout: <strong>â‚¹{payoutBooking.payout?.amount?.toLocaleString('en-IN')}</strong></p>
+                <p className="text-gray-700 font-medium">Approved payout: <strong>₹{payoutBooking.payout?.amount?.toLocaleString('en-IN')}</strong></p>
               )}
             </div>
 
@@ -528,7 +528,7 @@ function BookingsTab() {
                   <p className="text-xs font-bold text-gray-500 uppercase tracking-wider">Pandit Payment Details</p>
                   {hasBank && (
                     <div className="space-y-2">
-                      <p className="text-xs font-semibold text-gray-600">ðŸ¦ Bank Account</p>
+                      <p className="text-xs font-semibold text-gray-600">🏦 Bank Account</p>
                       <div className="grid grid-cols-2 gap-2 text-xs">
                         {bank.accountHolderName && (
                           <div className="bg-gray-50 rounded-lg p-2">
@@ -546,7 +546,7 @@ function BookingsTab() {
                           <div className="bg-gray-50 rounded-lg p-2">
                             <p className="text-gray-400 mb-0.5">Account Number</p>
                             <p className="font-semibold text-gray-800 font-mono">
-                              {'â€¢'.repeat(Math.max(0, bank.accountNumber.length - 4))}{bank.accountNumber.slice(-4)}
+                              {'•'.repeat(Math.max(0, bank.accountNumber.length - 4))}{bank.accountNumber.slice(-4)}
                             </p>
                           </div>
                         )}
@@ -561,7 +561,7 @@ function BookingsTab() {
                   )}
                   {hasUpi && (
                     <div className="space-y-2">
-                      <p className="text-xs font-semibold text-gray-600">ðŸ“± UPI</p>
+                      <p className="text-xs font-semibold text-gray-600">📱 UPI</p>
                       <div className="grid grid-cols-2 gap-2 text-xs">
                         <div className="bg-gray-50 rounded-lg p-2">
                           <p className="text-gray-400 mb-0.5">UPI ID</p>
@@ -570,7 +570,7 @@ function BookingsTab() {
                         <div className="bg-gray-50 rounded-lg p-2">
                           <p className="text-gray-400 mb-0.5">UPI Verified</p>
                           <p className={`font-semibold ${upi.isVerified ? 'text-green-700' : 'text-orange-600'}`}>
-                            {upi.isVerified ? 'âœ“ Yes' : 'Not Verified'}
+                            {upi.isVerified ? '✓ Yes' : 'Not Verified'}
                           </p>
                         </div>
                         {upi.verifiedName && (
@@ -590,7 +590,7 @@ function BookingsTab() {
               {payoutAction === 'assign' ? (
                 <>
                   <div>
-                    <label className="label">Payout Amount (â‚¹) *</label>
+                    <label className="label">Payout Amount (₹) *</label>
                     <input
                       type="number" min="0" step="100"
                       className="input text-sm"
@@ -643,7 +643,7 @@ function BookingsTab() {
   );
 }
 
-// â”€â”€â”€ Pandits / KYC Tab â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+// ─── Pandits / KYC Tab ────────────────────────────────────────
 const KYC_FILTER_TABS = [
   { key: 'submitted',          label: 'Pending Review',   color: 'bg-blue-500 text-white' },
   { key: 'approved',           label: 'KYC Approved',     color: 'bg-green-500 text-white' },
@@ -790,11 +790,11 @@ function PanditsTab() {
                         {p.status?.replace(/_/g, ' ')}
                       </span>
                     </div>
-                    <p className="text-sm text-gray-500">{p.email} Â· {p.phone}</p>
+                    <p className="text-sm text-gray-500">{p.email} · {p.phone}</p>
                     <p className="text-xs text-gray-400 mt-1">
-                      {p.govtIdType ? p.govtIdType.toUpperCase() : 'No ID'} Â·
-                      {' '}{p.experience || 0} yrs exp Â·
-                      {' '}{p.city ? `${p.city}, ${p.state}` : p.state || 'â€”'}
+                      {p.govtIdType ? p.govtIdType.toUpperCase() : 'No ID'} ·
+                      {' '}{p.experience || 0} yrs exp ·
+                      {' '}{p.city ? `${p.city}, ${p.state}` : p.state || '—'}
                     </p>
                     {/* Profile completion bar */}
                     <div className="mt-2 flex items-center gap-2 max-w-xs">
@@ -809,7 +809,7 @@ function PanditsTab() {
                     )}
                     <p className="text-xs text-gray-400 mt-1">
                       Joined: {new Date(p.createdAt).toLocaleDateString('en-IN')}
-                      {p.kycSubmittedAt && ` Â· KYC submitted: ${new Date(p.kycSubmittedAt).toLocaleDateString('en-IN')}`}
+                      {p.kycSubmittedAt && ` · KYC submitted: ${new Date(p.kycSubmittedAt).toLocaleDateString('en-IN')}`}
                     </p>
                   </div>
 
@@ -881,7 +881,7 @@ function PanditsTab() {
                       ))}
                       <div className="bg-white rounded-xl border border-gray-100 p-3">
                         <p className="text-[10px] text-gray-400 mb-1.5">ID Type</p>
-                        <p className="text-xs font-semibold capitalize">{p.govtIdType || 'â€”'}</p>
+                        <p className="text-xs font-semibold capitalize">{p.govtIdType || '—'}</p>
                         {p.govtIdNumber && <p className="text-[10px] text-gray-500 mt-0.5">{p.govtIdNumber}</p>}
                       </div>
                     </div>
@@ -921,7 +921,7 @@ function PanditsTab() {
               </button>
               <button onClick={handleDeletePandit} disabled={deleting}
                 className="flex-1 py-2.5 rounded-xl text-sm font-semibold text-white bg-red-600 hover:bg-red-700 disabled:opacity-50 transition-colors">
-                {deleting ? 'Deletingâ€¦' : 'Delete Permanently'}
+                {deleting ? 'Deleting…' : 'Delete Permanently'}
               </button>
             </div>
           </div>
@@ -953,7 +953,7 @@ function PanditsTab() {
 
             <label className="label">Reason * <span className="text-gray-400 font-normal">(min 5 characters)</span></label>
             <textarea className="input min-h-[80px] resize-none text-sm mb-4"
-              placeholder="Describe the issueâ€¦"
+              placeholder="Describe the issue…"
               value={reason} onChange={(e) => setReason(e.target.value)} />
 
             <div className="flex gap-3">
@@ -962,7 +962,7 @@ function PanditsTab() {
               </button>
               <button onClick={handleRejectOrReupload} disabled={submitting || reason.trim().length < 5}
                 className={`flex-1 py-2.5 rounded-xl text-sm font-semibold text-white disabled:opacity-50 transition-colors ${modal.action === 'reject' ? 'bg-red-600 hover:bg-red-700' : 'bg-purple-600 hover:bg-purple-700'}`}>
-                {submitting ? 'Submittingâ€¦' : (modal.action === 'reject' ? 'Confirm Rejection' : 'Request Re-upload')}
+                {submitting ? 'Submitting…' : (modal.action === 'reject' ? 'Confirm Rejection' : 'Request Re-upload')}
               </button>
             </div>
           </div>
@@ -972,7 +972,7 @@ function PanditsTab() {
   );
 }
 
-// â”€â”€â”€ Users Tab â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+// ─── Users Tab ────────────────────────────────────────────────
 function UsersTab() {
   const [userView,   setUserView]   = useState('all'); // 'all' | 'deletion_pending'
   const [users,      setUsers]      = useState([]);
@@ -1024,7 +1024,7 @@ function UsersTab() {
       <div className="flex gap-2">
         {[
           { key: 'all',              label: 'All Users' },
-          { key: 'deletion_pending', label: 'ðŸ—‘ Deletion Pending' },
+          { key: 'deletion_pending', label: '🗑 Deletion Pending' },
         ].map(({ key, label }) => (
           <button key={key} onClick={() => setUserView(key)}
             className={`px-4 py-1.5 rounded-full text-xs font-medium transition-all ${userView === key ? 'bg-saffron-500 text-white' : 'bg-white text-gray-600 border hover:border-saffron-300'}`}>
@@ -1033,7 +1033,7 @@ function UsersTab() {
         ))}
       </div>
 
-      {/* â”€â”€ All Users table â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */}
+      {/* ── All Users table ─────────────────────────────────── */}
       {userView === 'all' && (
         <div className="bg-white rounded-2xl shadow-sm border border-gray-100 overflow-hidden">
           <div className="overflow-x-auto">
@@ -1050,7 +1050,7 @@ function UsersTab() {
                   <tr key={u._id} className="hover:bg-saffron-50/30">
                     <td className="px-4 py-3 font-medium text-gray-800">{u.name}</td>
                     <td className="px-4 py-3 text-gray-500">{u.phone}</td>
-                    <td className="px-4 py-3 text-gray-500 text-xs">{u.email || 'â€”'}</td>
+                    <td className="px-4 py-3 text-gray-500 text-xs">{u.email || '—'}</td>
                     <td className="px-4 py-3"><span className="capitalize text-xs bg-saffron-50 text-saffron-700 px-2 py-0.5 rounded-full">{u.role}</span></td>
                     <td className="px-4 py-3 text-xs text-gray-400">{new Date(u.createdAt).toLocaleDateString('en-IN')}</td>
                     <td className="px-4 py-3">
@@ -1079,7 +1079,7 @@ function UsersTab() {
         </div>
       )}
 
-      {/* â”€â”€ Deletion Pending table â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */}
+      {/* ── Deletion Pending table ──────────────────────────── */}
       {userView === 'deletion_pending' && (
         <div className="bg-white rounded-2xl shadow-sm border border-gray-100 overflow-hidden">
           {loading ? <div className="py-10 text-center"><LoadingSpinner /></div> : (
@@ -1097,13 +1097,13 @@ function UsersTab() {
                   {users.map((u) => (
                     <tr key={u._id} className="hover:bg-red-50/30">
                       <td className="px-4 py-3 font-medium text-gray-800">{u.name}</td>
-                      <td className="px-4 py-3 text-gray-500 text-xs">{u.email || 'â€”'}</td>
+                      <td className="px-4 py-3 text-gray-500 text-xs">{u.email || '—'}</td>
                       <td className="px-4 py-3 text-gray-500">{u.phone}</td>
                       <td className="px-4 py-3 text-xs text-gray-400">
-                        {u.deletionRequestedAt ? new Date(u.deletionRequestedAt).toLocaleDateString('en-IN') : 'â€”'}
+                        {u.deletionRequestedAt ? new Date(u.deletionRequestedAt).toLocaleDateString('en-IN') : '—'}
                       </td>
                       <td className="px-4 py-3 text-xs font-semibold text-red-600">
-                        {u.scheduledDeletionDate ? new Date(u.scheduledDeletionDate).toLocaleDateString('en-IN') : 'â€”'}
+                        {u.scheduledDeletionDate ? new Date(u.scheduledDeletionDate).toLocaleDateString('en-IN') : '—'}
                       </td>
                       <td className="px-4 py-3">
                         <span className="badge-rejected text-[10px]">Deletion Pending</span>
@@ -1134,7 +1134,7 @@ function UsersTab() {
         </div>
       )}
 
-      {/* â”€â”€ Delete user confirmation modal â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */}
+      {/* ── Delete user confirmation modal ──────────────────── */}
       {delUserModal && (
         <div className="fixed inset-0 bg-black/50 z-50 flex items-center justify-center px-4">
           <div className="bg-white rounded-3xl shadow-2xl p-6 w-full max-w-sm">
@@ -1153,7 +1153,7 @@ function UsersTab() {
               <button onClick={() => setDelUserModal(null)} disabled={deletingUser} className="btn-outline flex-1">Cancel</button>
               <button onClick={handleDeleteUser} disabled={deletingUser}
                 className="flex-1 py-2.5 rounded-xl text-sm font-semibold text-white bg-red-600 hover:bg-red-700 disabled:opacity-50 transition-colors">
-                {deletingUser ? 'Deletingâ€¦' : 'Delete Permanently'}
+                {deletingUser ? 'Deleting…' : 'Delete Permanently'}
               </button>
             </div>
           </div>
@@ -1163,7 +1163,7 @@ function UsersTab() {
   );
 }
 
-// â”€â”€â”€ Poojas Tab â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+// ─── Poojas Tab ───────────────────────────────────────────────
 function PoojasTab() {
   const [categories, setCategories] = useState([]);
   const [poojas,     setPoojas]     = useState([]);
@@ -1259,10 +1259,10 @@ function PoojasTab() {
                   <tr key={p._id}>
                     <td className="px-4 py-3 font-medium text-gray-800">{p.name}</td>
                     <td className="px-4 py-3 text-gray-500 text-xs">{p.categoryId?.name}</td>
-                    <td className="px-4 py-3 font-bold text-saffron-600">â‚¹{p.price?.toLocaleString('en-IN')}</td>
+                    <td className="px-4 py-3 font-bold text-saffron-600">₹{p.price?.toLocaleString('en-IN')}</td>
                     <td className="px-4 py-3">
                       <button onClick={() => toggleFeatured(p)} className={`text-xs px-2 py-0.5 rounded-full ${p.isFeatured ? 'bg-gold-100 text-gold-700' : 'bg-gray-100 text-gray-500'}`}>
-                        {p.isFeatured ? 'â­ Featured' : 'Not Featured'}
+                        {p.isFeatured ? '⭐ Featured' : 'Not Featured'}
                       </button>
                     </td>
                     <td className="px-4 py-3">
@@ -1306,7 +1306,7 @@ function PoojasTab() {
               </div>
             </div>
             <div className="grid grid-cols-2 gap-3">
-              <div><label className="label">Price (â‚¹) *</label><input required type="number" className="input" value={poojaForm.price} onChange={(e)=>setPoojaForm({...poojaForm,price:e.target.value})} /></div>
+              <div><label className="label">Price (₹) *</label><input required type="number" className="input" value={poojaForm.price} onChange={(e)=>setPoojaForm({...poojaForm,price:e.target.value})} /></div>
               <div><label className="label">Duration</label><input className="input" placeholder="e.g. 2 hours" value={poojaForm.duration} onChange={(e)=>setPoojaForm({...poojaForm,duration:e.target.value})} /></div>
             </div>
             <div><label className="label">Short Description</label><input className="input" value={poojaForm.shortDesc} onChange={(e)=>setPoojaForm({...poojaForm,shortDesc:e.target.value})} /></div>
@@ -1322,7 +1322,7 @@ function PoojasTab() {
   );
 }
 
-// â”€â”€â”€ Festivals Tab â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+// ─── Festivals Tab ────────────────────────────────────────────
 const MONTH_NAMES = ['January','February','March','April','May','June','July','August','September','October','November','December'];
 
 function SyncResultCard({ result, onDismiss }) {
@@ -1439,7 +1439,7 @@ function FestivalsTab() {
         </div>
       </div>
 
-      {/* â”€â”€ Sync View â”€â”€ */}
+      {/* ── Sync View ── */}
       {view === 'sync' && (
         <div className="space-y-6">
           {/* Sync card */}
@@ -1493,7 +1493,7 @@ function FestivalsTab() {
 
             {syncing && (
               <p className="text-xs text-center text-gray-500 mt-2 animate-pulse">
-                Connecting to Google Apps Scriptâ€¦ this may take up to 60 seconds
+                Connecting to Google Apps Script… this may take up to 60 seconds
               </p>
             )}
           </div>
@@ -1542,7 +1542,7 @@ function FestivalsTab() {
         </div>
       )}
 
-      {/* â”€â”€ Manual Add â”€â”€ */}
+      {/* ── Manual Add ── */}
       {view === 'add' && (
         <div className="bg-white rounded-2xl p-6 border border-gray-100 max-w-md">
           <h2 className="font-bold text-gray-800 mb-4">Add Festival Manually</h2>
@@ -1557,7 +1557,7 @@ function FestivalsTab() {
         </div>
       )}
 
-      {/* â”€â”€ All Records â”€â”€ */}
+      {/* ── All Records ── */}
       {view === 'list' && (
         <div className="bg-white rounded-2xl border border-gray-100 overflow-hidden">
           <div className="overflow-x-auto">
@@ -1571,11 +1571,11 @@ function FestivalsTab() {
                 {festivals.map((f) => (
                   <tr key={f._id}>
                     <td className="px-4 py-3 font-semibold text-gray-800 max-w-[200px] truncate">
-                      {f.name || <span className="text-gray-400 italic text-xs">â€”</span>}
+                      {f.name || <span className="text-gray-400 italic text-xs">—</span>}
                     </td>
                     <td className="px-4 py-3 text-gray-500 whitespace-nowrap">{new Date(f.date).toLocaleDateString('en-IN')}</td>
                     <td className="px-4 py-3 text-xs text-saffron-600 max-w-[140px] truncate">
-                      {f.tithiDate || f.vrat || 'â€”'}
+                      {f.tithiDate || f.vrat || '—'}
                     </td>
                     <td className="px-4 py-3">
                       <span className={`text-xs px-2 py-0.5 rounded-full ${typeColor(f.dataType)}`}>
@@ -1603,7 +1603,7 @@ function FestivalsTab() {
   );
 }
 
-// â”€â”€â”€ Education Masters Tab â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+// ─── Education Masters Tab ────────────────────────────────────
 function EducationMastersTab() {
   const [masters,  setMasters]  = useState([]);
   const [loading,  setLoading]  = useState(true);
@@ -1747,7 +1747,7 @@ function EducationMastersTab() {
   );
 }
 
-// â”€â”€â”€ Specialization Masters Tab â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+// ─── Specialization Masters Tab ───────────────────────────────
 function SpecializationMastersTab() {
   const [masters,  setMasters]  = useState([]);
   const [loading,  setLoading]  = useState(true);
@@ -1874,7 +1874,7 @@ function SpecializationMastersTab() {
   );
 }
 
-// â”€â”€â”€ Admin Profile â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+// ─── Admin Profile ────────────────────────────────────────────
 function AdminProfile({ user, refreshUser }) {
   const [form, setForm] = useState({ name: user?.name || '', email: user?.email || '' });
   const [saving, setSaving] = useState(false);
@@ -1897,7 +1897,7 @@ function AdminProfile({ user, refreshUser }) {
         <ProfilePhoto currentPhoto={user?.profilePhoto} onUpdate={refreshUser} />
         <div className="mt-4 text-center">
           <p className="font-bold text-gray-800">{user?.name}</p>
-          <p className="text-sm text-gray-500">Admin Â· {user?.phone}</p>
+          <p className="text-sm text-gray-500">Admin · {user?.phone}</p>
         </div>
       </div>
       <div className="bg-white rounded-2xl p-6 border border-gray-100">
@@ -1912,7 +1912,7 @@ function AdminProfile({ user, refreshUser }) {
   );
 }
 
-// â”€â”€â”€ Pandit Poojas Approval Tab â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+// ─── Pandit Poojas Approval Tab ───────────────────────────────
 function PanditPoojasTab() {
   const [poojas,  setPoojas]  = useState([]);
   const [loading, setLoading] = useState(true);
@@ -1956,7 +1956,7 @@ function PanditPoojasTab() {
             <div key={p._id} className="bg-white rounded-2xl border border-gray-100 p-5 flex items-start gap-4 shadow-sm">
               {p.image
                 ? <img src={`https://zutsav-production.up.railway.app/${p.image}`} alt="" className="w-14 h-14 rounded-xl object-cover shrink-0" />
-                : <div className="w-14 h-14 rounded-xl bg-saffron-50 flex items-center justify-center text-2xl shrink-0">ðŸª”</div>
+                : <div className="w-14 h-14 rounded-xl bg-saffron-50 flex items-center justify-center text-2xl shrink-0">🪔</div>
               }
               <div className="flex-1 min-w-0">
                 <div className="flex flex-wrap items-center gap-2 mb-1">
@@ -1966,7 +1966,7 @@ function PanditPoojasTab() {
                   </span>
                 </div>
                 <p className="text-sm text-gray-500">By: {p.panditId?.name} ({p.panditId?.phone})</p>
-                <p className="text-xs text-gray-400">Category: {p.categoryId?.name} Â· â‚¹{p.price?.toLocaleString()}</p>
+                <p className="text-xs text-gray-400">Category: {p.categoryId?.name} · ₹{p.price?.toLocaleString()}</p>
                 {p.adminNote && <p className="text-xs text-red-600 mt-1">Note: {p.adminNote}</p>}
               </div>
               {filter === 'pending' && (
@@ -1988,7 +1988,7 @@ function PanditPoojasTab() {
   );
 }
 
-// â”€â”€â”€ Orders Tab â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+// ─── Orders Tab ───────────────────────────────────────────────
 const ORDER_STATUS_META = {
   paid:             { label: 'Order Placed',    color: 'bg-blue-100 text-blue-700'    },
   confirmed:        { label: 'Confirmed',        color: 'bg-indigo-100 text-indigo-700'},
@@ -2083,7 +2083,7 @@ function OrdersTab() {
           { label: 'Total Orders',   value: stats.totalOrders   || 0, color: '#1B1F3B' },
           { label: 'Pending',        value: stats.pendingOrders || 0, color: '#d97706' },
           { label: 'Delivered',      value: stats.deliveredOrders||0, color: '#059669' },
-          { label: 'Revenue',        value: `â‚¹${(stats.totalRevenue||0).toLocaleString('en-IN')}`, color: '#D4AF37' },
+          { label: 'Revenue',        value: `₹${(stats.totalRevenue||0).toLocaleString('en-IN')}`, color: '#D4AF37' },
         ].map(({ label, value, color }) => (
           <div key={label} className="bg-white rounded-2xl border border-gray-100 p-4">
             <p className="text-2xl font-bold" style={{ color, fontFamily: '"Cormorant Garamond"' }}>{value}</p>
@@ -2141,14 +2141,14 @@ function OrdersTab() {
                     <tr key={o._id} className="border-b border-gray-50 hover:bg-gray-50 transition-colors">
                       <td className="px-4 py-3 font-mono text-xs font-semibold text-gray-700">#{o.orderNumber}</td>
                       <td className="px-4 py-3">
-                        <p className="font-medium text-gray-800 text-xs">{o.userId?.name || 'â€”'}</p>
+                        <p className="font-medium text-gray-800 text-xs">{o.userId?.name || '—'}</p>
                         <p className="text-gray-400 text-[10px]">{o.userId?.phone}</p>
                       </td>
                       <td className="px-4 py-3 text-xs text-gray-600">
                         {o.items?.[0]?.name}{o.items?.length > 1 ? ` +${o.items.length-1}` : ''}
                       </td>
                       <td className="px-4 py-3 font-bold text-gray-800" style={{ fontFamily: '"Cormorant Garamond"' }}>
-                        â‚¹{o.totalAmount?.toLocaleString('en-IN')}
+                        ₹{o.totalAmount?.toLocaleString('en-IN')}
                       </td>
                       <td className="px-4 py-3">
                         <span className={`text-[10px] font-semibold px-2 py-0.5 rounded-full ${meta?.color || 'bg-gray-100 text-gray-500'}`}>
@@ -2185,9 +2185,9 @@ function OrdersTab() {
 
             {/* Order summary */}
             <div className="bg-gray-50 rounded-xl p-3 mb-4 text-xs space-y-1">
-              <p className="font-semibold text-gray-700">{actionOrder.userId?.name} Â· {actionOrder.userId?.phone}</p>
+              <p className="font-semibold text-gray-700">{actionOrder.userId?.name} · {actionOrder.userId?.phone}</p>
               <p className="text-gray-500">{actionOrder.shippingAddress?.city}, {actionOrder.shippingAddress?.state}</p>
-              <p className="text-gray-600">{actionOrder.items?.length} item(s) Â· â‚¹{actionOrder.totalAmount?.toLocaleString('en-IN')}</p>
+              <p className="text-gray-600">{actionOrder.items?.length} item(s) · ₹{actionOrder.totalAmount?.toLocaleString('en-IN')}</p>
               <div className="flex items-center gap-1.5 mt-1">
                 <span className={`text-[10px] font-semibold px-2 py-0.5 rounded-full ${ORDER_STATUS_META[actionOrder.status]?.color || 'bg-gray-100 text-gray-600'}`}>
                   {ORDER_STATUS_META[actionOrder.status]?.label || actionOrder.status}
@@ -2200,8 +2200,8 @@ function OrdersTab() {
               <p className="text-xs font-bold text-gray-500 uppercase tracking-wide mb-2">Items</p>
               {actionOrder.items?.map((item, i) => (
                 <div key={i} className="flex justify-between text-xs py-1 border-b border-gray-100">
-                  <span className="text-gray-700">{item.name} Ã—{item.quantity}</span>
-                  <span className="font-semibold">â‚¹{item.total?.toLocaleString('en-IN')}</span>
+                  <span className="text-gray-700">{item.name} ×{item.quantity}</span>
+                  <span className="font-semibold">₹{item.total?.toLocaleString('en-IN')}</span>
                 </div>
               ))}
             </div>
@@ -2225,7 +2225,7 @@ function OrdersTab() {
                   {nextStatuses.map((s) => (
                     <button key={s} onClick={() => setNewStatus(s)}
                       className={`px-3 py-1.5 rounded-xl text-xs font-semibold border transition-all ${newStatus === s ? 'border-indigo-500 bg-indigo-50 text-indigo-700' : 'border-gray-200 text-gray-600 hover:border-gray-300'}`}>
-                      â†’ {ORDER_STATUS_META[s]?.label || s}
+                      → {ORDER_STATUS_META[s]?.label || s}
                     </button>
                   ))}
                 </div>
@@ -2252,7 +2252,7 @@ function OrdersTab() {
   );
 }
 
-// â”€â”€â”€ Marketplace Tab (Products + Kits) â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+// ─── Marketplace Tab (Products + Kits) ────────────────────────
 function MarketplaceTab() {
   const [view, setView] = useState('products');
   const [products, setProducts] = useState([]);
@@ -2368,9 +2368,9 @@ function MarketplaceTab() {
             <div key={p._id} className="bg-white rounded-2xl border border-gray-100 p-4">
               {p.images?.[0] && <img src={`https://zutsav-production.up.railway.app/${p.images[0]}`} alt="" className="w-full h-32 object-cover rounded-xl mb-3" />}
               <p className="font-semibold text-gray-800 text-sm">{p.name}</p>
-              <p className="text-xs text-gray-500 mt-0.5 capitalize">{p.category} Â· Stock: {p.stock}</p>
+              <p className="text-xs text-gray-500 mt-0.5 capitalize">{p.category} · Stock: {p.stock}</p>
               <p className="text-saffron-600 font-bold text-sm mt-1">
-                {p.salePrice ? <><s className="text-gray-400">â‚¹{p.price}</s> â‚¹{p.salePrice}</> : `â‚¹${p.price}`}
+                {p.salePrice ? <><s className="text-gray-400">₹{p.price}</s> ₹{p.salePrice}</> : `₹${p.price}`}
               </p>
             </div>
           ))}
@@ -2388,22 +2388,22 @@ function MarketplaceTab() {
                   <p className="text-xs text-gray-500 mt-0.5">{k.items?.length} items</p>
                   {k.totalCost > 0 && (
                     <p className="text-xs text-gray-400 mt-0.5">
-                      Cost: â‚¹{k.totalCost?.toLocaleString('en-IN')}
+                      Cost: ₹{k.totalCost?.toLocaleString('en-IN')}
                       {k.discountValue > 0 && (
                         <span className="ml-1 text-green-600">
-                          âˆ’ {k.discountType === 'percentage' ? `${k.discountValue}%` : `â‚¹${k.discountValue}`}
+                          − {k.discountType === 'percentage' ? `${k.discountValue}%` : `₹${k.discountValue}`}
                         </span>
                       )}
                     </p>
                   )}
-                  <p className="text-saffron-600 font-bold text-sm mt-0.5">Sell: â‚¹{k.discountPrice?.toLocaleString('en-IN')}</p>
+                  <p className="text-saffron-600 font-bold text-sm mt-0.5">Sell: ₹{k.discountPrice?.toLocaleString('en-IN')}</p>
                 </div>
                 <button onClick={() => deleteKit(k._id)} className="text-red-400 hover:text-red-600 p-1"><Trash2 size={15} /></button>
               </div>
               <div className="mt-2 flex flex-wrap gap-1">
                 {k.items?.slice(0,3).map((item, i) => (
                   <span key={i} className="text-xs bg-saffron-50 text-saffron-700 px-2 py-0.5 rounded-full">
-                    {item.productId?.name || 'â€”'} Ã—{item.quantity}
+                    {item.productId?.name || '—'} ×{item.quantity}
                   </span>
                 ))}
                 {k.items?.length > 3 && <span className="text-xs text-gray-400">+{k.items.length-3} more</span>}
@@ -2428,7 +2428,7 @@ function MarketplaceTab() {
               </div>
             </div>
             <div className="grid grid-cols-3 gap-3">
-              <div><label className="label">Price (â‚¹) *</label><input required type="number" className="input" value={productForm.price} onChange={(e)=>setProductForm({...productForm,price:e.target.value})} /></div>
+              <div><label className="label">Price (₹) *</label><input required type="number" className="input" value={productForm.price} onChange={(e)=>setProductForm({...productForm,price:e.target.value})} /></div>
               <div><label className="label">Sale Price</label><input type="number" className="input" value={productForm.salePrice} onChange={(e)=>setProductForm({...productForm,salePrice:e.target.value})} /></div>
               <div><label className="label">Stock *</label><input required type="number" className="input" value={productForm.stock} onChange={(e)=>setProductForm({...productForm,stock:e.target.value})} /></div>
             </div>
@@ -2450,7 +2450,7 @@ function MarketplaceTab() {
             <div><label className="label">Kit Name *</label><input required className="input" value={kitForm.name} onChange={(e)=>setKitForm({...kitForm,name:e.target.value})} /></div>
             <div><label className="label">Description</label><textarea rows={2} className="input resize-none" value={kitForm.description} onChange={(e)=>setKitForm({...kitForm,description:e.target.value})} /></div>
 
-            {/* â”€â”€ Kit Items â”€â”€ */}
+            {/* ── Kit Items ── */}
             <div>
               <label className="label">Kit Items *</label>
               <div className="space-y-2">
@@ -2463,17 +2463,17 @@ function MarketplaceTab() {
                         onChange={(e) => { const n=[...kitItems]; n[idx].productId=e.target.value; setKitItems(n); }}>
                         <option value="">Select product</option>
                         {products.filter(p=>p.isActive&&p.stock>0).map((p) => (
-                          <option key={p._id} value={p._id}>{p.name} â€” â‚¹{p.salePrice||p.price}</option>
+                          <option key={p._id} value={p._id}>{p.name} — ₹{p.salePrice||p.price}</option>
                         ))}
                       </select>
                       <input type="number" min="1" className="input w-20 text-sm" value={item.quantity}
                         onChange={(e)=>{ const n=[...kitItems]; n[idx].quantity=+e.target.value||1; setKitItems(n); }} />
                       {prod && (
                         <span className="text-xs text-saffron-600 font-medium whitespace-nowrap">
-                          â‚¹{((prod.salePrice||prod.price) * item.quantity).toLocaleString('en-IN')}
+                          ₹{((prod.salePrice||prod.price) * item.quantity).toLocaleString('en-IN')}
                         </span>
                       )}
-                      <button type="button" onClick={() => setKitItems(kitItems.filter((_,i)=>i!==idx))} className="text-red-400 hover:text-red-600 px-1 text-lg leading-none">Ã—</button>
+                      <button type="button" onClick={() => setKitItems(kitItems.filter((_,i)=>i!==idx))} className="text-red-400 hover:text-red-600 px-1 text-lg leading-none">×</button>
                     </div>
                   );
                 })}
@@ -2481,19 +2481,19 @@ function MarketplaceTab() {
               <button type="button" onClick={() => setKitItems([...kitItems,{productId:'',quantity:1}])} className="text-sm text-saffron-600 mt-2 hover:underline">+ Add Item</button>
             </div>
 
-            {/* â”€â”€ Auto-Pricing Panel â”€â”€ */}
+            {/* ── Auto-Pricing Panel ── */}
             {kitTotalCost > 0 && (
               <div className="bg-saffron-50 border border-saffron-200 rounded-xl p-4 space-y-3">
                 <div className="flex items-center justify-between">
                   <span className="text-sm font-semibold text-gray-700">Product Total Cost</span>
-                  <span className="text-lg font-bold text-gray-800">â‚¹{kitTotalCost.toLocaleString('en-IN')}</span>
+                  <span className="text-lg font-bold text-gray-800">₹{kitTotalCost.toLocaleString('en-IN')}</span>
                 </div>
 
                 <div className="grid grid-cols-2 gap-3">
                   <div>
                     <label className="label text-xs">Discount Type</label>
                     <div className="flex gap-2">
-                      {[['percentage','% Percent'],['fixed','â‚¹ Fixed']].map(([val, lbl]) => (
+                      {[['percentage','% Percent'],['fixed','₹ Fixed']].map(([val, lbl]) => (
                         <button key={val} type="button"
                           onClick={() => { setKitForm({...kitForm, discountType: val}); setKitPriceOverride(false); }}
                           className={`flex-1 flex items-center justify-center gap-1 text-xs px-2 py-2 rounded-lg border font-medium transition-colors ${kitForm.discountType===val ? 'bg-saffron-500 text-white border-saffron-500' : 'bg-white text-gray-600 border-gray-300 hover:border-saffron-300'}`}>
@@ -2506,7 +2506,7 @@ function MarketplaceTab() {
                     <label className="label text-xs">Discount Value</label>
                     <div className="relative">
                       <span className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-500 text-sm">
-                        {kitForm.discountType === 'percentage' ? '%' : 'â‚¹'}
+                        {kitForm.discountType === 'percentage' ? '%' : '₹'}
                       </span>
                       <input type="number" min="0" max={kitForm.discountType==='percentage'?100:kitTotalCost}
                         className="input pl-7"
@@ -2530,7 +2530,7 @@ function MarketplaceTab() {
                 </div>
                 {kitPriceOverride && (
                   <button type="button" onClick={() => setKitPriceOverride(false)}
-                    className="text-xs text-saffron-600 hover:underline">â†º Recalculate from discount</button>
+                    className="text-xs text-saffron-600 hover:underline">↺ Recalculate from discount</button>
                 )}
                 {kitTotalCost > 0 && +kitSellingPrice > kitTotalCost && (
                   <p className="text-xs text-orange-600 bg-orange-50 rounded-lg p-2">âš  Selling price exceeds product total cost. Please verify.</p>
@@ -2562,7 +2562,7 @@ function MarketplaceTab() {
   );
 }
 
-// â”€â”€â”€ Temples Tab â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+// ─── Temples Tab ──────────────────────────────────────────────
 const INDIA_CENTER = { lat: 20.5937, lng: 78.9629 };
 
 function TemplesTab() {
@@ -2629,13 +2629,13 @@ function TemplesTab() {
         <h1 className="text-2xl font-bold text-gray-800">Temple Directory</h1>
         <button onClick={() => setView(view === 'add' ? 'list' : 'add')}
           className={view === 'add' ? 'btn-outline text-sm px-4 py-2' : 'btn-primary text-sm px-4 py-2 flex items-center gap-2'}>
-          {view === 'add' ? 'â† Back to List' : <><Plus size={16} />Add Temple</>}
+          {view === 'add' ? '← Back to List' : <><Plus size={16} />Add Temple</>}
         </button>
       </div>
 
       {view === 'add' && (
         <div className="grid lg:grid-cols-2 gap-6">
-          {/* Left â€” form */}
+          {/* Left — form */}
           <div className="bg-white rounded-2xl p-6 border border-gray-100">
             <h2 className="font-bold text-gray-800 mb-4">Add Temple</h2>
             <form onSubmit={createTemple} className="space-y-4">
@@ -2700,7 +2700,7 @@ function TemplesTab() {
             </form>
           </div>
 
-          {/* Right â€” map */}
+          {/* Right — map */}
           <div className="space-y-2">
             <p className="text-sm font-medium text-gray-700 flex items-center gap-1.5">
               <MapPin size={14} className="text-saffron-500" /> Drag pin or click to set exact location
@@ -2721,7 +2721,7 @@ function TemplesTab() {
             <div key={t._id} className="bg-white rounded-2xl border border-gray-100 overflow-hidden shadow-sm">
               {t.images?.[0]
                 ? <img src={`https://zutsav-production.up.railway.app/${t.images[0]}`} alt="" className="w-full h-36 object-cover" />
-                : <div className="w-full h-36 bg-saffron-50 flex items-center justify-center text-4xl">ðŸ›•</div>
+                : <div className="w-full h-36 bg-saffron-50 flex items-center justify-center text-4xl">🛕</div>
               }
               <div className="p-4">
                 <p className="font-bold text-gray-800">{t.name}</p>
@@ -2738,7 +2738,7 @@ function TemplesTab() {
   );
 }
 
-// â”€â”€â”€ Livestreams Tab â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+// ─── Livestreams Tab ──────────────────────────────────────────
 function LivestreamsTab() {
   const [streams,  setStreams]  = useState([]);
   const [temples,  setTemples]  = useState([]);
@@ -2780,7 +2780,7 @@ function LivestreamsTab() {
         <h1 className="text-2xl font-bold text-gray-800">Livestream Management</h1>
         <button onClick={() => setView(view === 'add' ? 'list' : 'add')}
           className={view === 'add' ? 'btn-outline text-sm px-4 py-2' : 'btn-primary text-sm px-4 py-2 flex items-center gap-2'}>
-          {view === 'add' ? 'â† Back' : <><Plus size={16} />Add Livestream</>}
+          {view === 'add' ? '← Back' : <><Plus size={16} />Add Livestream</>}
         </button>
       </div>
 
@@ -2815,7 +2815,7 @@ function LivestreamsTab() {
                 </div>
                 <div>
                   <p className="font-semibold text-gray-800 text-sm">{s.title}</p>
-                  <p className="text-xs text-gray-500">{s.templeId?.name} â€” {s.templeId?.city}</p>
+                  <p className="text-xs text-gray-500">{s.templeId?.name} — {s.templeId?.city}</p>
                 </div>
               </div>
               <div className="flex items-center gap-3 shrink-0">
@@ -2831,7 +2831,7 @@ function LivestreamsTab() {
   );
 }
 
-// â”€â”€â”€ Referral Stats Tab â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+// ─── Referral Stats Tab ────────────────────────────────────────
 function ReferralStatsTab() {
   const [data, setData]   = useState(null);
   const [loading, setLoading] = useState(true);
@@ -2884,7 +2884,7 @@ function ReferralStatsTab() {
                 <span className={`w-6 h-6 rounded-full flex items-center justify-center text-xs font-bold ${i < 3 ? 'bg-saffron-100 text-saffron-700' : 'bg-gray-100 text-gray-500'}`}>{i + 1}</span>
                 <div>
                   <p className="font-semibold text-gray-800 text-sm">{u.name}</p>
-                  <p className="text-xs text-gray-400">{u.phone} {u.email ? `Â· ${u.email}` : ''}</p>
+                  <p className="text-xs text-gray-400">{u.phone} {u.email ? `· ${u.email}` : ''}</p>
                 </div>
               </div>
               <div className="flex items-center gap-4 shrink-0">
@@ -2899,7 +2899,7 @@ function ReferralStatsTab() {
   );
 }
 
-// â”€â”€â”€ System Settings Tab â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+// ─── System Settings Tab ──────────────────────────────────────
 const SETTING_SECTIONS = [
   { key: 'general',   label: 'General',   icon: Settings },
   { key: 'payment',   label: 'Payment',   icon: CreditCard },
@@ -2980,7 +2980,7 @@ function SystemSettingsTab() {
       </SectionForm>
     ),
     payment: (
-      <SectionForm title="Payment â€” PhonePe" onSave={() => save(['phonepeEnv','phonepeMerchantId','phonepeSaltKey','phonepeSaltIndex','phonepeWebhookUrl','phonepeRedirectUrl'])} saving={saving}>
+      <SectionForm title="Payment — PhonePe" onSave={() => save(['phonepeEnv','phonepeMerchantId','phonepeSaltKey','phonepeSaltIndex','phonepeWebhookUrl','phonepeRedirectUrl'])} saving={saving}>
         <div>
           <label className="label">Environment</label>
           <div className="flex gap-3">
@@ -3020,7 +3020,7 @@ function SystemSettingsTab() {
         <div>
           <label className="label">Transport Mode</label>
           <div className="flex gap-3">
-            {[['service','Named Service (Gmail, Outlookâ€¦)'],['smtp','Custom SMTP Server']].map(([val, lbl]) => (
+            {[['service','Named Service (Gmail, Outlook…)'],['smtp','Custom SMTP Server']].map(([val, lbl]) => (
               <label key={val} className="flex items-center gap-2 cursor-pointer text-sm">
                 <input type="radio" name="_emailMode" value={val}
                   checked={(form.emailSmtpHost ? 'smtp' : 'service') === val}
@@ -3046,11 +3046,11 @@ function SystemSettingsTab() {
         )}
         <Field label="SMTP / Auth Email" name="emailSmtpUser" type="email" value={form.emailSmtpUser || ''} onChange={set} />
         <SecretInput label="Password / App Password" name="emailSmtpPassword" value={form.emailSmtpPassword || ''} onChange={set} />
-        <InfoBox>For Gmail, use an App Password (not your account password). Enable 2FA first, then generate at myaccount.google.com â†’ Security â†’ App Passwords.</InfoBox>
+        <InfoBox>For Gmail, use an App Password (not your account password). Enable 2FA first, then generate at myaccount.google.com → Security → App Passwords.</InfoBox>
       </SectionForm>
     ),
     ai: (
-      <SectionForm title="AI â€” Groq" onSave={() => save(['groqApiKey','groqModel'])} saving={saving}>
+      <SectionForm title="AI — Groq" onSave={() => save(['groqApiKey','groqModel'])} saving={saving}>
         <SecretInput label="Groq API Key" name="groqApiKey" value={form.groqApiKey || ''} onChange={set} />
         <div>
           <label className="label">Model</label>
@@ -3064,11 +3064,11 @@ function SystemSettingsTab() {
       </SectionForm>
     ),
     media: (
-      <SectionForm title="Media â€” Cloudinary" onSave={() => save(['cloudinaryCloudName','cloudinaryApiKey','cloudinaryApiSecret'])} saving={saving}>
+      <SectionForm title="Media — Cloudinary" onSave={() => save(['cloudinaryCloudName','cloudinaryApiKey','cloudinaryApiSecret'])} saving={saving}>
         <Field label="Cloud Name" name="cloudinaryCloudName" value={form.cloudinaryCloudName || ''} onChange={set} />
         <Field label="API Key" name="cloudinaryApiKey" value={form.cloudinaryApiKey || ''} onChange={set} />
         <SecretInput label="API Secret" name="cloudinaryApiSecret" value={form.cloudinaryApiSecret || ''} onChange={set} />
-        <InfoBox>Find credentials at cloudinary.com â†’ Dashboard. Currently the platform stores uploads locally â€” Cloudinary integration can be wired in as an upload middleware upgrade.</InfoBox>
+        <InfoBox>Find credentials at cloudinary.com → Dashboard. Currently the platform stores uploads locally — Cloudinary integration can be wired in as an upload middleware upgrade.</InfoBox>
       </SectionForm>
     ),
     security: (
@@ -3101,7 +3101,7 @@ function SystemSettingsTab() {
         </div>
         <div>
           <h1 className="text-2xl font-bold text-gray-800" style={{ fontFamily: '"Cormorant Garamond"' }}>System Settings</h1>
-          <p className="text-xs text-gray-400">All credentials stored in database â€” no server restart needed</p>
+          <p className="text-xs text-gray-400">All credentials stored in database — no server restart needed</p>
         </div>
       </div>
 
@@ -3160,7 +3160,7 @@ function SectionForm({ title, children, onSave, saving }) {
           style={{ background: '#1B1F3B' }}
         >
           <Save size={14} />
-          {saving ? 'Savingâ€¦' : 'Save Section'}
+          {saving ? 'Saving…' : 'Save Section'}
         </button>
       </div>
       <div className="px-6 py-5 space-y-4">
@@ -3189,7 +3189,7 @@ function Field({ label, name, value, onChange, type = 'text', placeholder }) {
 function InfoBox({ children }) {
   return (
     <div className="flex gap-2 bg-blue-50 border border-blue-100 rounded-xl px-4 py-3 text-xs text-blue-700">
-      <span className="shrink-0 mt-0.5">â„¹</span>
+      <span className="shrink-0 mt-0.5">ℹ</span>
       <span>{children}</span>
     </div>
   );
@@ -3198,7 +3198,7 @@ function InfoBox({ children }) {
 function LoadingSpinner() {
   return (
     <div className="flex justify-center py-16">
-      <div className="animate-spin text-4xl">ðŸª”</div>
+      <div className="animate-spin text-4xl">🪔</div>
     </div>
   );
 }

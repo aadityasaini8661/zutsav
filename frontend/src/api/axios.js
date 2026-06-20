@@ -2,7 +2,8 @@ import axios from 'axios';
 import toast from 'react-hot-toast';
 
 const API = axios.create({
-  baseURL: 'https://zutsav-production.up.railway.app/api',
+  baseURL: process.env.REACT_APP_API_URL || 'https://zutsav-production.up.railway.app/api',
+  timeout: 15_000, // 15 s — prevents infinite loading on slow/dead connections
   withCredentials: true,
 });
 
@@ -13,10 +14,17 @@ API.interceptors.request.use((config) => {
   return config;
 });
 
-// Handle 401 and 429 globally
+// Global response error handling
 API.interceptors.response.use(
   (res) => res,
   (err) => {
+    if (err.code === 'ECONNABORTED' || err.message?.includes('timeout')) {
+      toast.error('Request timed out. Please check your connection and try again.', {
+        id: 'timeout-error',
+        duration: 6000,
+      });
+      return Promise.reject(err);
+    }
     if (err.response?.status === 401) {
       localStorage.removeItem('zutsav_token');
       localStorage.removeItem('zutsav_user');

@@ -1,4 +1,4 @@
-﻿import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { MapPin, Search, Tv, X, ChevronRight, Play } from 'lucide-react';
 import API from '../api/axios';
 import toast from 'react-hot-toast';
@@ -31,7 +31,7 @@ function TempleCard({ temple, onWatch }) {
         ) : (
           <div className="w-full h-full flex items-center justify-center"
                style={{ background: 'linear-gradient(135deg, #1B1F3B 0%, #2d3160 100%)' }}>
-            <span className="text-6xl">ðŸ›•</span>
+            <span className="text-6xl">🛕</span>
           </div>
         )}
 
@@ -268,7 +268,7 @@ export default function TempleDirectory() {
           <div className="text-center py-20">
             <div className="w-20 h-20 rounded-3xl flex items-center justify-center mx-auto mb-5"
                  style={{ background: 'var(--t-surface)' }}>
-              <span className="text-4xl">ðŸ›•</span>
+              <span className="text-4xl">🛕</span>
             </div>
             <h3 className="text-2xl font-bold mb-2"
                 style={{ fontFamily: '"Cormorant Garamond"', color: 'var(--t-text)' }}>

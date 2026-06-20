@@ -502,7 +502,20 @@ export default function Register() {
       toast.success(`OTP sent to your ${ch === 'email' ? 'email' : 'WhatsApp'}!`);
       setStep('otp');
     } catch (err) {
-      toast.error(err.response?.data?.message || 'Failed to send OTP');
+      const status  = err.response?.status;
+      const message = err.response?.data?.message;
+      const hint    = err.response?.data?.hint;
+
+      if (err.code === 'ECONNABORTED' || err.message?.includes('timeout')) {
+        toast.error('Request timed out. Please check your connection and try again.', { duration: 7000 });
+      } else if (status === 503) {
+        // Email / WhatsApp delivery blocked (Railway SMTP restriction, etc.)
+        const altLabel = hint === 'whatsapp' ? 'WhatsApp' : 'Email';
+        toast.error(`${message || 'Delivery failed.'} Please try ${altLabel} OTP instead.`, { duration: 8000 });
+        setStep('channel'); // Send user back to channel selection
+      } else {
+        toast.error(message || 'Failed to send OTP. Please try again.');
+      }
     } finally {
       setLoading(false);
     }
